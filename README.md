@@ -1,4 +1,4 @@
-**Aaron Epstein, Charlie Caron, Nikhil Bhatia-Lin**
+Aaron Epstein, Charlie Caron, Nikhil Bhatia-Lin
 Comp20 Final Project | FeedTheRock
 
 ### Project title
@@ -64,10 +64,10 @@ We will be using a simple algorithm to calculate the amount of points for each l
 
 
 ### Wireframes
-![Start Screen](https://drive.google.com/file/d/0Bw9C0XqqDRqNanJ2Q2lwd0RKT0U/view?usp=sharing)
-![Pick Celebrity](https://drive.google.com/file/d/0Bw9C0XqqDRqNajRMcFdzQnJMMGc/view?usp=sharing)
-![Pick Meal](https://drive.google.com/file/d/0Bw9C0XqqDRqNYmlzMzNYdFFXMnc/view?usp=sharing)
-![Make Meal](https://drive.google.com/file/d/0Bw9C0XqqDRqNUUszSzBlcUI3NmM/view?usp=sharing)
+![Start Screen](/wireframes/startscreen.png)
+![Pick Celebrity](/wireframes/pickcelebrity.png)
+![Pick Meal](/wireframes/pickmeal.png)
+![Make Meal](/wireframes/makemeal.png)
 
 
 
