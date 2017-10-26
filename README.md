@@ -1,23 +1,22 @@
-# Aaron Epstein, Charlie Caron, Nikhil Bhatia-Lin
-# Comp20 Final Project
-# FeedTheRock
+**Aaron Epstein, Charlie Caron, Nikhil Bhatia-Lin**
+Comp20 Final Project | FeedTheRock
 
-## Project title
+### Project title
 FeedTheRock
 
-## Problem statement
+### Problem statement
 People generally don’t have a good idea of how to cook/do portion control, which can
 cause unhealthy eating, and malnutrition.
 
-## Our solution
+### Our solution
 A game that helps train the user to learn how to do proper portion control and feed a healthy diet.
 
-## Features that our team will implement
+### Features that our team will implement
 Server-side data persistence
 Client side data persistence
 Front-end framework
 
-## Data our prototype will be using and collecting
+### Data our prototype will be using and collecting
 For each user (stored with client-side data persistence):
  * Current game points
  * Level
@@ -47,7 +46,7 @@ For each celebrity:
  * Party level
 We will be using the spoonacular api to get a list of meals and ingredients necessary for those meals, along with the nutrition information for a serving of different foods
 
-## Algorithms or special techniques that will be necessary
+### Algorithms or special techniques that will be necessary
 We will be using the BMR formula to calculate the recommended calories for each celebrity
 We will be using a simple algorithm to calculate the amount of points for each level:
   * A level has a maximum of 100 points
@@ -64,8 +63,11 @@ We will be using a simple algorithm to calculate the amount of points for each l
           * 50 points are taken off if they are fed something that violates dietary restrictions (e.g. gluten free)
 
 
-## Wireframes
-
+### Wireframes
+![Start Screen](https://drive.google.com/file/d/0Bw9C0XqqDRqNanJ2Q2lwd0RKT0U/view?usp=sharing)
+![Pick Celebrity](https://drive.google.com/file/d/0Bw9C0XqqDRqNajRMcFdzQnJMMGc/view?usp=sharing)
+![Pick Meal](https://drive.google.com/file/d/0Bw9C0XqqDRqNYmlzMzNYdFFXMnc/view?usp=sharing)
+![Make Meal](https://drive.google.com/file/d/0Bw9C0XqqDRqNUUszSzBlcUI3NmM/view?usp=sharing)
 
 
 
