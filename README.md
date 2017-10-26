@@ -1,4 +1,4 @@
-Aaron Epstein, Charlie Caron, Nikhil Bhatia-Lin
+Aaron Epstein, Charlie Caron, Nikhil Bhatia-Lin  
 Comp20 Final Project | FeedTheRock
 
 ### Project title
