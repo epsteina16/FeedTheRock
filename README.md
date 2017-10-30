@@ -72,8 +72,4 @@ We will be using a simple algorithm to calculate the amount of points for each l
 ## Comments by Ming
 * Fantastic and novel idea.
 * Sorry, your list of features are not features.  What will server-side and client be used for? Ditto with email.  A feature is *what* the user(s) will *do*
-
-
-
-
-
+* Your mockups are too nice.  Now person seeing those mockups will expect same look and feel.
