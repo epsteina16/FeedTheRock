@@ -29,6 +29,16 @@ app.use('/users', users);
 
 app.use('/api', api);
 
+// TODO: Insert stuff to send to pick celeb page  
+app.get('/pickcelebrity', function (req, res) {
+  res.send('difficulty')
+});
+
+// TODO: Insert stuff to send to pick meal page
+app.get('/pickmeal', function (req, res) {
+  res.send('celebinfo')
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
