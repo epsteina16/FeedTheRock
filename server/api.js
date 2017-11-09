@@ -56,5 +56,23 @@ router.post('/addCelebrity', function(request, response) {
 	response.send();
 }) 
 
+//get celebrity route
+//returns in JSON the celebrity document for the given celebrity name
+router.get("/getCelebrity/:celebrityName", function(req, res){
+	var celebrityName = req.params.celebrityName;
+
+	celebrity.findOne({"name": name}, function(err, celeb){
+		if (err) {
+			console.log("Bad request made to getCelebrity");
+			return res.status(500).send();
+		} else {
+			if (!celeb) {
+				console.log("Bad request made to getCelebrity");
+				return res.status(500).send();
+			}
+			return res.status(200).send(celeb);
+		}
+	});
+});
 
 module.exports = router;
