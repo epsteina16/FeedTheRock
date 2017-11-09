@@ -8,6 +8,9 @@ var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+mongoose.connect("mongodb://heroku_sp1cfplm:m93lcp3m90qar7p8tj3cv07cke@ds153015.mlab.com:53015/heroku_sp1cfplm");
+
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -32,8 +35,6 @@ router.getTenCelebrities(function(req, res)){
 		JSON.stringify(bigJSON);
 	});
 }
-
-mongoose.connect('mongodb://localhost/test');
 
 router.use(function(req, res, next){
 	console.log("In API");
