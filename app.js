@@ -5,16 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
+app.set('port', (process.env.PORT || 5000));
+
+//import api
 var api = require('./server/api');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,19 +21,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
 
+//use api route
 app.use('/api', api);
 
-// TODO: Insert stuff to send to pick celeb page  
-app.get('/pickcelebrity', function (req, res) {
-  res.send('difficulty')
-});
-
-// TODO: Insert stuff to send to pick meal page
-app.get('/pickmeal', function (req, res) {
-  res.send('celebinfo')
+// Main route
+app.get('/', function(req,res){
+  //TODO: send react index.html file
+  res.send("HTML");
 });
 
 // catch 404 and forward to error handler
@@ -57,4 +49,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
