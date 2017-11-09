@@ -8,6 +8,12 @@ var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //database models
 var celebrity = require('./models/celebrity');
 
