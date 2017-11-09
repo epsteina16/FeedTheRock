@@ -8,6 +8,8 @@ var router = express.Router();
 //database models
 var celebrity = require('./models/celebrity');
 
+mongoose.connect('mongodb://localhost/test');
+
 router.use(function(req, res, next){
 	console.log("In API");
 	next();
