@@ -17,3 +17,6 @@ information into the database
 * Learn React and Redux
 * Finish testing the API
 * Start building the frontend
+
+# Comments by Ming
+* Whoa, you are already done with the API?  That's a huge accomplishment
