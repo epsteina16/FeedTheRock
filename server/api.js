@@ -19,6 +19,7 @@ app.use(function(req, res, next) {
 
 //database models
 var celebrity = require('./models/celebrity');
+var highscore = require('./models/highscore');
 
 router.getTenCelebrities(function(req, res)){
 	celebrity.find({}, function(err, obj){
@@ -77,7 +78,7 @@ router.post('/addCelebrity', function(request, response) {
   		}
 	});
 	response.send();
-}) 
+}); 
 
 //get celebrity route
 //returns in JSON the celebrity document for the given celebrity name
@@ -98,4 +99,45 @@ router.get("/getCelebrity/:celebrityName", function(req, res){
 	});
 });
 
+router.post("/addhighscore", function(req, res){
+	var username = request.body.username;
+	var score = request.body.score;
+
+	var newHighscore = new highscore({
+		"username":username,
+		"score":score
+	});
+
+	newHighscore.save(function (err, newHighscore) {
+		if (err) {
+			return response.status(500);
+  		}
+  		else {
+  			return response.status(200);
+  		}
+	});
+	response.send();
+});
+
+router.get("/getTopTen", function(req, res){
+	highscore.find({}, function(err, highscores) {
+		if (!err) {
+			var sortedScores = JSON.parse(highscores);
+			sortedScores.sort(function(a,b) {
+				return b.score - a.score;
+			});
+			var topTenScores;
+			int count = 0;
+			for (int i = (sortedScores.length - 1); i >= (sortedScores.length - 11); i--) {
+				topTenScores[count] = sortedScores[i];
+				count++;
+			}
+			var topTen = JSON.stringify(topTenScores);
+			response.send(topTen);
+		}
+		else {
+			response.send(500);
+		}
+	})
+})
 module.exports = router;
