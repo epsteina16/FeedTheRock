@@ -26,14 +26,17 @@ router.getTenCelebrities(function(req, res){
 		if (err) {
 			return res.status(500);
 		}
-		obj.toArray();
+		var objArray = JSON.parse(obj);
 		var rando = Math.random();
-		for(int i = 0; i < 10; i++){
-			rando = Math.random() * obj.length;
-			json = JSON.stringify(obj[rando]);
-			bigJSON[i] = json;
+		var tenCelebs = [];
+		var celeb;
+		for(var i = 0; i < 10; i++){
+			rando = Math.random() * objArray.length;
+			celeb = JSON.stringify(objArray[rando]);
+			tenCelebs.push(celeb);
 		}
-		JSON.stringify(bigJSON);
+		var result = JSON.stringify(tenCelebs);
+		return res.status(200).send(result);
 	});
 }
 
