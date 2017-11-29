@@ -81,6 +81,8 @@ router.post('/addCelebrity', function(request, response) {
 router.get("/getCelebrity", function(req, res){
 	var celebrityName = req.query.celebrityName;
 
+	console.log(celebrityName);
+
 	celebrity.findOne({"name": name}, function(err, celeb){
 		if (err) {
 			console.log("Bad request made to getCelebrity");
