@@ -127,8 +127,8 @@ router.get("/getTopTen", function(req, res){
 				return b.score - a.score;
 			});
 			var topTenScores;
-			int count = 0;
-			for (int i = (sortedScores.length - 1); i >= (sortedScores.length - 11); i--) {
+			var count = 0;
+			for (var i = (sortedScores.length - 1); i >= (sortedScores.length - 11); i--) {
 				topTenScores[count] = sortedScores[i];
 				count++;
 			}
