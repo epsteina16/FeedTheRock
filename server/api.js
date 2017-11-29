@@ -78,8 +78,8 @@ router.post('/addCelebrity', function(request, response) {
 
 //get celebrity route
 //returns in JSON the celebrity document for the given celebrity name
-router.get("/getCelebrity/:celebrityName", function(req, res){
-	var celebrityName = req.params.celebrityName;
+router.get("/getCelebrity", function(req, res){
+	var celebrityName = req.query.celebrityName;
 
 	celebrity.findOne({"name": name}, function(err, celeb){
 		if (err) {
