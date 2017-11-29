@@ -83,7 +83,7 @@ router.get("/getCelebrity", function(req, res){
 
 	console.log(celebrityName);
 
-	celebrity.findOne({"name": name}, function(err, celeb){
+	celebrity.findOne({"name": celebrityName}, function(err, celeb){
 		if (err) {
 			console.log("Bad request made to getCelebrity");
 			return res.status(500).send();
