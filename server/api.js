@@ -14,7 +14,7 @@ mongoose.connect("mongodb://heroku_sp1cfplm:m93lcp3m90qar7p8tj3cv07cke@ds153015.
 var celebrity = require('./models/celebrity');
 var highscore = require('./models/highscore');
 
-router.getTenCelebrities(function(req, res){
+router.get("/getTenCelebrities", function(req, res){
 	celebrity.find({}, function(err, obj){
 		if (err) {
 			return res.status(500);
