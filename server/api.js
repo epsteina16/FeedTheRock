@@ -38,7 +38,7 @@ router.getTenCelebrities(function(req, res){
 		var result = JSON.stringify(tenCelebs);
 		return res.status(200).send(result);
 	});
-}
+});
 
 router.use(function(req, res, next){
 	console.log("In API");
