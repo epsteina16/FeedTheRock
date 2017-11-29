@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 var celebrity = require('./models/celebrity');
 var highscore = require('./models/highscore');
 
-router.getTenCelebrities(function(req, res)){
+router.getTenCelebrities(function(req, res){
 	celebrity.find({}, function(err, obj){
 		if (err) {
 			return res.status(500);
