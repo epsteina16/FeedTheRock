@@ -9,7 +9,7 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.set('view engine', 'html');
+app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
