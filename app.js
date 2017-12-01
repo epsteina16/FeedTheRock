@@ -9,8 +9,6 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
-
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -36,7 +34,7 @@ app.use('/api', api);
 // Main route
 app.get('/', function(req,res){
   //TODO: send react index.html file
-  res.send("HTML");
+  res.sendFile(path.join(__dirname + 'src/index.html'));
 });
 
 // catch 404 and forward to error handler
