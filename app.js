@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8888));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -34,7 +34,7 @@ app.use('/api', api);
 // Main route
 app.get('/', function(req,res){
   //TODO: send react index.html file
-  res.sendFile(path.join(__dirname + 'src/index.html'));
+  res.sendFile(path.join(__dirname + '/src/index.html'));
 });
 
 // catch 404 and forward to error handler
