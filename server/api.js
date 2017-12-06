@@ -23,7 +23,7 @@ router.get("/getTenCelebrities", function(req, res){
 		var rando = Math.random();
 		var tenCelebs = [];
 		var celeb;
-		for(var i = 0; i < 10; i++){
+		for(var i = 0; i < 3; i++){
 			rando = Math.random() * objArray.length;
 			celeb = JSON.stringify(objArray[rando]);
 			tenCelebs.push(celeb);
