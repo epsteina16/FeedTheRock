@@ -15,3 +15,8 @@
 * Get working app (rough draft - not finish with styling, etc.)
 * Add all celebrities
 * Play the game!
+
+# Comments by Ming
+* Looks like you accomplished your goals from status report 2
+* Might as well focus on play testing for the next few days.
+* Who on earth are the celebrities? I imagine Dwayne Johnson but who else?  

@@ -14,7 +14,7 @@ mongoose.connect("mongodb://heroku_sp1cfplm:m93lcp3m90qar7p8tj3cv07cke@ds153015.
 var celebrity = require('./models/celebrity');
 var highscore = require('./models/highscore');
 
-router.get("/getTenCelebrities", function(req, res){
+router.get("/getThreeCelebrities", function(req, res){
 	celebrity.find({}, function(err, obj){
 		if (err) {
 			return res.status(500);
@@ -23,7 +23,7 @@ router.get("/getTenCelebrities", function(req, res){
 		var rando = Math.random();
 		var tenCelebs = [];
 		var celeb;
-		for(var i = 0; i < 10; i++){
+		for(var i = 0; i < 3; i++){
 			rando = Math.random() * objArray.length;
 			celeb = JSON.stringify(objArray[rando]);
 			tenCelebs.push(celeb);
