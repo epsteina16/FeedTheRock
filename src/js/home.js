@@ -6,7 +6,8 @@ const app = document.getElementById('app');
 class Main extends React.Component {
 	render() {
 		return (
-			<h1>Hello</h1>
+			<h1> Hello </h1>
+			<button type="button"> Start onClick={() => alert('click')</button>
 		);
 	}
 }
