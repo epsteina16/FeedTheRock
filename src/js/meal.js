@@ -1,74 +1,63 @@
 //TODO:
-//autocomplete
-//add search things like gluten free...
-//pictures of food
+//pan animation
+//show nutrition for meal
 
 import React from "react";
+import PickMeal from "./PickMeal";
+
+const url = "https://api.edamam.com/search";
+const api_key = "75e18472c4a3e6bfc9fac10d5ce607c7";
+const app_id = "b387bdfd";
+
 
 export default class Meal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			lunchChosen: true,
-			dinnerChosen: true,
-			breakfastChosen: true,
-			nutrients: {calories: 0, fats: 0, saturated: 0, carbs: 0, fiber: 0, sugar: 0, protein: 0, cholesterol: 0}
+			lunchChosen: false,
+			lunchEntered: false,
+			dinnerChosen: false,
+			dinnerEntered: false,
+			breakfastChosen: false,
+			breakfastEntered: false,
+			nutrients: {calories: 0, fats: 0, saturated: 0, carbs: 0, fiber: 0, sugar: 0, protein: 0, cholesterol: 0, sodium: 0},
+			breakfast: "",
+			breakfastAmount: 0,
+			lunch: "",
+			lunchAmount: 0,
+			dinner: "",
+			dinnerAmount: 0
 		}
 	}
 
-
+	//called on cook
 	cookClicked() {
-		var breakfast = {recipeName: $('#breakfast').val(), amount: parseInt($('#breakfast-amount').val())};
-		var lunch = {recipeName: $('#lunch').val(), amount: parseInt($('#lunch-amount').val())};
-		var dinner = {recipeName: $('#dinner').val(), amount: parseInt($('#dinner-amount').val())};
-
-		var fn = this.storeNutrients.bind(this);
 		var process = this.sendData.bind(this);
 
-		var url = "https://api.edamam.com/search";
-		var api_key = "75e18472c4a3e6bfc9fac10d5ce607c7";
-		var app_id = "b387bdfd";
-
-		var nutrients = new Object();
-
-		console.log(this.state.nutrients);
-
-		$.get(url, {q: breakfast.recipeName, app_key: api_key, app_id: app_id, from: 0, to: 1}, function(data){
-			fn(data, breakfast.amount);
-
-			$.get(url, {q: lunch.recipeName, app_key: api_key, app_id: app_id, from: 0, to: 1}, function(data){
-				fn(data, lunch.amount);
-
-				$.get(url, {q: dinner.recipeName, app_key: api_key, app_id: app_id, from: 0, to: 1}, function(data){
-					fn(data, dinner.amount);
-
-					process();
-				});
-			});
-		});
+		process();
 	}
 
 	sendData() {
-		//all meals have been processed
-		console.log(this.state.nutrients);
 		this.props.feed(this.state.nutrients);
 	}
 
+	//store nutrients
 	storeNutrients(result, quantity){
 		var nutrients = new Object();
 
-		if (result.hits.length == 0){
+		if (result.length == 0){
 			console.log("error");
 		} else {
-			var food_item = result.hits[0].recipe;
+			var food_item = result;
 			nutrients.calories = food_item.calories * quantity;
-			nutrients.fats = food_item.totalNutrients.FAT.quantity * quantity;
-			nutrients.saturated = food_item.totalNutrients.FASAT.quantity * quantity;
-			nutrients.carbs = food_item.totalNutrients.CHOCDF.quantity * quantity;
-			nutrients.fiber = food_item.totalNutrients.FIBTG.quantity * quantity;
-			nutrients.sugar = food_item.totalNutrients.SUGAR.quantity * quantity;
-			nutrients.protein = food_item.totalNutrients.PROCNT.quantity * quantity;
-			nutrients.cholesterol = food_item.totalNutrients.CHOLE.quantity * quantity;
+			nutrients.fats = food_item.FAT.quantity * quantity;
+			nutrients.saturated = food_item.FASAT.quantity * quantity;
+			nutrients.carbs = food_item.CHOCDF.quantity * quantity;
+			nutrients.fiber = food_item.FIBTG.quantity * quantity;
+			nutrients.sugar = food_item.SUGAR.quantity * quantity;
+			nutrients.protein = food_item.PROCNT.quantity * quantity;
+			nutrients.cholesterol = food_item.CHOLE.quantity * quantity;
+			nutrients.sodium = food_item.NA.quantity * quantity;
 
 			this.setState({nutrients: {
 				calories: this.state.nutrients.calories + nutrients.calories,
@@ -78,37 +67,103 @@ export default class Meal extends React.Component {
 				fiber: this.state.nutrients.fiber + nutrients.fiber,
 				sugar: this.state.nutrients.sugar + nutrients.sugar,
 				protein: this.state.nutrients.protein + nutrients.protein,
-				cholesterol: this.state.nutrients.cholesterol + nutrients.cholesterol
+				cholesterol: this.state.nutrients.cholesterol + nutrients.cholesterol,
+				sodium: this.state.nutrients.sodium + nutrients.sodium
 			}});
 		}
 	}
+
+	//called when breakfast added
+	addBreakfast(breakfast) {
+		var fn = this.storeNutrients.bind(this);
+		fn(breakfast.nutrients, breakfast.amount);
+		this.setState({"breakfastEntered": false, "breakfast": breakfast.recipe, "breakfastAmount": breakfast.amount, "breakfastChosen": true});
+	}
+
+	makeBreakfast() {
+		this.setState({"breakfastEntered": true});
+	}
+
+	//called when lunch added
+	addLunch(lunch) {
+		var fn = this.storeNutrients.bind(this);
+		fn(lunch.nutrients, lunch.amount);
+		this.setState({"lunchEntered": false, "lunch": lunch.recipe, "lunchAmount": lunch.amount, "lunchChosen": true});
+	}
+
+	makeLunch() {
+		this.setState({"lunchEntered": true});
+	}
+
+	//called when dinner added
+	addDinner(dinner) {
+		var fn = this.storeNutrients.bind(this);
+		fn(dinner.nutrients, dinner.amount);
+		this.setState({"dinnerEntered": false, "dinner": dinner.recipe, "dinnerAmount": dinner.amount, "dinnerChosen": true});
+	}
+
+	makeDinner() {
+		this.setState({"dinnerEntered": true});
+	}
+
+
+
 	
 
 	render () {
-		return (
-			<div>
-			<h2>Choose your meals!</h2>
-			<label for="breakfast">Breakfast: </label><input id="breakfast" />
-			{ this.state.breakfastChosen ? 
-					(<div><label for="breakfast-amount">Number of portions: </label><input id="breakfast-amount" type="range" min="1" max="5" /></div>) 
-					: (<p>Not selected</p>)
-			}
 
-			<label for="lunch">Lunch: </label><input id="lunch" />
-			{ this.state.lunchChosen ? 
-					(<div><label for="lunch-amount">Number of portions: </label><input id="lunch-amount" type="range" min="1" max="5" /></div>) 
-					: (<p>Not selected</p>)
-			}
+		if (this.state.breakfastEntered) {
+			return (
+				<PickMeal mealName = {"Breakfast"} chooseMeal = {this.addBreakfast.bind(this)} />
+			);
+		}
+		else if (this.state.lunchEntered) {
+			return (
+				<PickMeal mealName = {"Lunch"} chooseMeal = {this.addLunch.bind(this)} />
+			);
+		}
+		else if (this.state.dinnerEntered) {
+			return (
+				<PickMeal mealName = {"Dinner"} chooseMeal = {this.addDinner.bind(this)} />
+			);
+		}
+		else {
+			return (
+				<div class="meal-container">
+				<h2>Pick Your Meals</h2>
 
-			<label for="dinner">Dinner: </label><input id="dinner" />
-			{ this.state.dinnerChosen ? 
-					(<div><label for="dinner-amount">Number of portions: </label><input id="dinner-amount" type="range" min="1" max="5" /></div>) 
-					: (<p>Not selected</p>)
-			}
+				{this.state.breakfastChosen ? (
+					<p> { this.state.breakfast } </p>
+				) : (
+					<div>
+					<button onClick={ this.makeBreakfast.bind(this) }>Make Breakfast</button>
+					<br />
+					</div>
+				)}
 
-			<button onClick={this.cookClicked.bind(this)}>Cook!</button>
-			</div>
-		);
+				{this.state.lunchChosen ? (
+					<p> { this.state.lunch } </p>
+				) : (
+					<div>
+					<button onClick={ this.makeLunch.bind(this) }>Make Lunch</button>
+					<br />
+					</div>
+				)}
+
+				{this.state.dinnerChosen ? (
+					<p> { this.state.dinner } </p>
+				) : (
+					<div>
+					<button onClick={ this.makeDinner.bind(this) }>Make Dinner</button>
+					<br />
+					</div>
+				)}
+
+
+				<button onClick={this.cookClicked.bind(this)} disabled={!this.state.breakfastChosen || !this.state.lunchChosen || !this.state.dinnerChosen}>Cook!</button>
+				</div>
+			);
+		}
 	}
 }
 
