@@ -32,7 +32,7 @@ export default class PickMeal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			mealChosen: true,
+			mealChosen: false,
 			recipes: [],
 			value: "",
 			image: "",
@@ -51,7 +51,7 @@ export default class PickMeal extends React.Component {
 	// Autosuggest will call this function every time you need to update suggestions.
 	// You already implemented this logic above, so just use it.
 	onSuggestionsFetchRequested = ({ value }) => {
-		if (this.state.value.length == 5 || this.state.value[this.state.value.length - 1] == " ") {
+		if (this.state.value.length >= 5) {
 			$.get(url, {q: this.state.value, app_key: api_key, app_id: app_id, from: 0, to: 100}, function(data){
 				var result = data.hits;
 				var meals;
@@ -123,15 +123,13 @@ export default class PickMeal extends React.Component {
 		return (
 			<div class="meal">
 				<h2> {this.props.mealName} {this.state.mealChosen ? (": " + this.state.value) : ("")}</h2>
+				{ this.state.mealChosen ? (
 				<div class="meal-info">
 					<div class="meal-pic">
-						{ this.state.mealChosen ?
-							( <img src={ this.state.image } alt="Meal"></img>) 
-								: (<br />)
-						}
+							<img src={ this.state.image } alt="Meal"></img>
 					</div>
 					<div class="meal-ingredients">
-						<h5>Nutrition Facts per Recipe</h5>
+						<h3>Nutrition Facts per Recipe</h3>
 						<p>Calories: { this.state.nutrients.calories }</p>
 						<p>Fat: { this.state.nutrients.FAT.quantity }g</p>
 						<p>Carbohydrates: { this.state.nutrients.CHOCDF.quantity }g</p>
@@ -139,6 +137,7 @@ export default class PickMeal extends React.Component {
 						<p>Protein: {this.state.nutrients.PROCNT.quantity}g</p>
 					</div>
 				</div>
+				): (<br />) }
 				<div class="meal-choose">
 					<Autosuggest
 				        suggestions={suggestions}

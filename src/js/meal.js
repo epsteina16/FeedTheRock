@@ -32,53 +32,32 @@ export default class Meal extends React.Component {
 
 	//called on cook
 	cookClicked() {
-		var breakfast = {recipeName: this.state.breakfast, amount: this.state.breakfastAmount};
-		var lunch = {recipeName: this.state.lunch, amount: this.state.lunchAmount};
-		var dinner = {recipeName: this.state.dinner, amount: this.state.dinnerAmount};
-
-		var fn = this.storeNutrients.bind(this);
 		var process = this.sendData.bind(this);
 
-		var nutrients = new Object();
-
-		console.log(this.state.nutrients);
-
-		$.get(url, {q: breakfast.recipeName, app_key: api_key, app_id: app_id, from: 0, to: 1}, function(data){
-			fn(data, breakfast.amount);
-
-			$.get(url, {q: lunch.recipeName, app_key: api_key, app_id: app_id, from: 0, to: 1}, function(data){
-				fn(data, lunch.amount);
-
-				$.get(url, {q: dinner.recipeName, app_key: api_key, app_id: app_id, from: 0, to: 1}, function(data){
-					fn(data, dinner.amount);
-
-					process();
-				});
-			});
-		});
+		process();
 	}
 
 	sendData() {
 		this.props.feed(this.state.nutrients);
 	}
 
-	//
+	//store nutrients
 	storeNutrients(result, quantity){
 		var nutrients = new Object();
 
-		if (result.hits.length == 0){
+		if (result.length == 0){
 			console.log("error");
 		} else {
 			var food_item = result;
 			nutrients.calories = food_item.calories * quantity;
-			nutrients.fats = food_item.totalNutrients.FAT.quantity * quantity;
-			nutrients.saturated = food_item.totalNutrients.FASAT.quantity * quantity;
-			nutrients.carbs = food_item.totalNutrients.CHOCDF.quantity * quantity;
-			nutrients.fiber = food_item.totalNutrients.FIBTG.quantity * quantity;
-			nutrients.sugar = food_item.totalNutrients.SUGAR.quantity * quantity;
-			nutrients.protein = food_item.totalNutrients.PROCNT.quantity * quantity;
-			nutrients.cholesterol = food_item.totalNutrients.CHOLE.quantity * quantity;
-			nutrients.sodium = food_item.totalNutrients.NA.quantity * quantity;
+			nutrients.fats = food_item.FAT.quantity * quantity;
+			nutrients.saturated = food_item.FASAT.quantity * quantity;
+			nutrients.carbs = food_item.CHOCDF.quantity * quantity;
+			nutrients.fiber = food_item.FIBTG.quantity * quantity;
+			nutrients.sugar = food_item.SUGAR.quantity * quantity;
+			nutrients.protein = food_item.PROCNT.quantity * quantity;
+			nutrients.cholesterol = food_item.CHOLE.quantity * quantity;
+			nutrients.sodium = food_item.NA.quantity * quantity;
 
 			this.setState({nutrients: {
 				calories: this.state.nutrients.calories + nutrients.calories,
@@ -96,7 +75,8 @@ export default class Meal extends React.Component {
 
 	//called when breakfast added
 	addBreakfast(breakfast) {
-		storeNutrients(breakfast.nutrients, breakfast.amount).bind(this);
+		var fn = this.storeNutrients.bind(this);
+		fn(breakfast.nutrients, breakfast.amount);
 		this.setState({"breakfastEntered": false, "breakfast": breakfast.recipe, "breakfastAmount": breakfast.amount, "breakfastChosen": true});
 	}
 
@@ -106,7 +86,8 @@ export default class Meal extends React.Component {
 
 	//called when lunch added
 	addLunch(lunch) {
-		storeNutrients(lunch.nutrients, lunch.amount).bind(this);
+		var fn = this.storeNutrients.bind(this);
+		fn(lunch.nutrients, lunch.amount);
 		this.setState({"lunchEntered": false, "lunch": lunch.recipe, "lunchAmount": lunch.amount, "lunchChosen": true});
 	}
 
@@ -116,7 +97,8 @@ export default class Meal extends React.Component {
 
 	//called when dinner added
 	addDinner(dinner) {
-		storeNutrients(dinner.nutrients, dinner.amount).bind(this);
+		var fn = this.storeNutrients.bind(this);
+		fn(dinner.nutrients, dinner.amount);
 		this.setState({"dinnerEntered": false, "dinner": dinner.recipe, "dinnerAmount": dinner.amount, "dinnerChosen": true});
 	}
 

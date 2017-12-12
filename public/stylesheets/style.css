@@ -114,10 +114,30 @@ a {
 	text-align: center;
 }
 
-.meal-pic img{
-	padding: 20px;
-	display: inline-block;
+.meal-pic{
+	padding: 10px;
+	width: 45%;
+	float: left;
 }
+
+.meal-info {
+	width: 90%;
+	display: inline-block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.meal-pic img{
+	width: 100%;
+}
+
+.meal-ingredients{
+	padding: 10px;
+	float: left;
+	width: 45%;
+}
+
+
 
 #pan-btn {
 	border: none;
