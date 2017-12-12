@@ -127,40 +127,40 @@ export default class Celebrity extends React.Component {
 
 	render() {
 		var exerciseState;
-		if (this.state.exerciseLevel == "Sedentary") {
+		if (this.props.exerciseLevel == "Sedentary") {
 			exerciseState = "Sedentary";
 		}
-		else if (this.state.exerciseLevel == "Lightly Active") {
+			else if (this.props.exerciseLevel == "Lightly Active") {
 			exerciseState = "Lightly Active";
 		}
-		else if (this.state.exerciseLevel == "Moderately Active") {
+		else if (this.props.exerciseLevel == "Moderately Active") {
 			exerciseState = "Moderately Active";
 		}
-		else if (this.state.exerciseLevel == "Very Active") {
+		else if (this.props.exerciseLevel == "Very Active") {
 			exerciseState = "Very Active";
 		}
-		else if (this.state.exerciseLevel == "Extra Active") {
+		else if (this.props.exerciseLevel == "Extra Active") {
 			exerciseState = "Extremely Active";
 		}
 
 		var partyState;
-		if (this.state.partyLevel == "Low") {
+		if (this.props.partyLevel == "Low") {
 			partyState = "Doesn't party";
 		}
-		else if (this.state.partyLevel == "Medium") {
+		else if (this.props.partyLevel == "Medium") {
 			partyState = "Parties some";
 		}
-		else if (this.state.partyLevel == "High") {
+		else if (this.props.partyLevel == "High") {
 			partyState = "Parties hard";
 		}
 		var level;
-		if (this.state.difficulty == "Easy") {
+		if (this.props.difficulty == "Easy") {
 			level = "Easy";
 		}
-		else if (this.state.difficulty == "Medium") {
+		else if (this.props.difficulty == "Medium") {
 			level = "Medium";
 		}
-		else if (this.state.difficulty == "Hard") {
+		else if (this.props.difficulty == "Hard") {
 			level = "Hard";
 		}
 		
@@ -171,32 +171,32 @@ export default class Celebrity extends React.Component {
 			(
 				<div>
 				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
-				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<h2 class = "textcenter">Your Celebrity is: {this.props.name}</h2>
 				<div class = "container">
 					<div class = "lattribute-data lcontainer">
-						<h6 class = "sideattribute">{this.state.age} years old</h6>
-						<h6 class = "sideattribute">{Math.floor(this.state.height / 12)}&rsquo; {this.state.height % 12}&quot; </h6>
-						<h6 class = "sideattribute">{this.state.weight} lbs</h6>
-						{this.state.isGlutenFree ? 
+						<h6 class = "sideattribute">{this.props.age} years old</h6>
+						<h6 class = "sideattribute">{Math.floor(this.props.height / 12)}&rsquo; {this.props.height % 12}&quot; </h6>
+						<h6 class = "sideattribute">{this.props.weight} lbs</h6>
+						{this.props.isGlutenFree ? 
 								(<h6 class = "sideattribute">Gluten Free</h6>) 
 								: (<h6 class = "sideattribute">Eats Gluten</h6>)
 						}
 						<h6 class = "sideattribute">{exerciseState}</h6>	
 					</div>
 					<div class = "rattribute-data rcontainer">
-						<h6 class = "sideattribute">{this.state.gender}</h6>
-						{this.state.isVegan ? 
+						<h6 class = "sideattribute">{this.props.gender}</h6>
+						{this.props.isVegan ? 
 								(<h6 class = "sideattribute">Vegan</h6>) 
 								: (<h6 class = "sideattribute">Not Vegan</h6>)
 						}
-						{this.state.isVegetarian ? 
+						{this.props.isVegetarian ? 
 								(<h6 class = "sideattribute">Vegetarian</h6>) 
 								: (<h6 class = "sideattribute">Not Vegetarian</h6>)
 						}
 						<h6 class = "sideattribute">{partyState}</h6>
 					</div>
 
-					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+					<img class="img-rounded celebrityphoto" src={this.props.imageLink}alt="Celebrity image"></img>
 				</div>
 
 				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
@@ -218,27 +218,27 @@ export default class Celebrity extends React.Component {
 			(
 				<div>
 				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
-				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<h2 class = "textcenter">Your Celebrity is: {this.props.name}</h2>
 				<div class = "container">
 					<div class = "lattribute-data lcontainer">
-						{this.state.isGlutenFree ? 
+						{this.props.isGlutenFree ? 
 								(<h6 class = "sideattribute">Gluten Free</h6>) 
 								: (<h6 class = "sideattribute">Eats Gluten</h6>)
 						}
 						<h6 class = "sideattribute">{exerciseState}</h6>	
 					</div>
 					<div class = "rattribute-data rcontainer">
-						{this.state.isVegan ? 
+						{this.props.isVegan ? 
 								(<h6 class = "sideattribute">Vegan</h6>) 
 								: (<h6 class = "sideattribute">Not Vegan</h6>)
 						}
-						{this.state.isVegetarian ? 
+						{this.props.isVegetarian ? 
 								(<h6 class = "sideattribute">Vegetarian</h6>) 
 								: (<h6 class = "sideattribute">Not Vegetarian</h6>)
 						}
 					</div>
 
-					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+					<img class="img-rounded celebrityphoto" src={this.props.imageLink}alt="Celebrity image"></img>
 				</div>
 
 				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
@@ -260,14 +260,14 @@ export default class Celebrity extends React.Component {
 			(
 				<div>
 				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
-				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<h2 class = "textcenter">Your Celebrity is: {this.props.name}</h2>
 				<div class = "container">
 					<div class = "lattribute-data lcontainer">
 					</div>
 					<div class = "rattribute-data rcontainer">
 					</div>
 
-					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+					<img class="img-rounded celebrityphoto" src={this.props.imageLink}alt="Celebrity image"></img>
 				</div>
 
 				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
@@ -289,32 +289,32 @@ export default class Celebrity extends React.Component {
 			(
 				<div>
 				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
-				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<h2 class = "textcenter">Your Celebrity is: {this.props.name}</h2>
 				<div class = "container">
 					<div class = "lattribute-data lcontainer">
-						<h6 class = "sideattribute">{this.state.age} years old</h6>
-						<h6 class = "sideattribute">{Math.floor(this.state.height / 12)}&rsquo; {this.state.height % 12}&quot; </h6>
-						<h6 class = "sideattribute">{this.state.weight} lbs</h6>
-						{this.state.isGlutenFree ? 
+						<h6 class = "sideattribute">{this.props.age} years old</h6>
+						<h6 class = "sideattribute">{Math.floor(this.props.height / 12)}&rsquo; {this.props.height % 12}&quot; </h6>
+						<h6 class = "sideattribute">{this.props.weight} lbs</h6>
+						{this.props.isGlutenFree ? 
 								(<h6 class = "sideattribute">Gluten Free</h6>) 
 								: (<h6 class = "sideattribute">Eats Gluten</h6>)
 						}
 						<h6 class = "sideattribute">{exerciseState}</h6>	
 					</div>
 					<div class = "rattribute-data rcontainer">
-						<h6 class = "sideattribute">{this.state.gender}</h6>
-						{this.state.isVegan ? 
+						<h6 class = "sideattribute">{this.props.gender}</h6>
+						{this.props.isVegan ? 
 								(<h6 class = "sideattribute">Vegan</h6>) 
 								: (<h6 class = "sideattribute">Not Vegan</h6>)
 						}
-						{this.state.isVegetarian ? 
+						{this.props.isVegetarian ? 
 								(<h6 class = "sideattribute">Vegetarian</h6>) 
 								: (<h6 class = "sideattribute">Not Vegetarian</h6>)
 						}
 						<h6 class = "sideattribute">{partyState}</h6>
 					</div>
 
-					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+					<img class="img-rounded celebrityphoto" src={this.props.imageLink}alt="Celebrity image"></img>
 				</div>
 
 				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
