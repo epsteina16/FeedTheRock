@@ -157,7 +157,8 @@ var j = schedule.scheduleJob('/30 * * * * *', function(){
 	request(url, function(error, response, body){
 		if (!error && response.statusCode == 200) {
 			var result = body;
-			console.log(body);
+			//console.log(body);
+			console.log(result.q);
 			var recipe;
 			for (var i = 0; i < result.hits.length; i++){
 				recipe = result.hits[i].recipe;
