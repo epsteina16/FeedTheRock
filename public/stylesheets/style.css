@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.meal-container {
+	width: 80%;
+	left: 20%;
+}
