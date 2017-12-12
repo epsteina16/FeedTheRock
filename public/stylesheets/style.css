@@ -288,7 +288,6 @@ a {
 .celebrityphoto {
 	flex-grow: 2;
 	order: 2;
-	max-width: 50%;
 }
 
 .rattribute-data {
