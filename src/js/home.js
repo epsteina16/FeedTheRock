@@ -59,7 +59,7 @@ class Main extends React.Component {
 			return (
 				<div>
 				<audio autoPlay>
-						<source src="audio/cooking.mp3" type="audio/mpeg"> </source>
+						<source src="audio/cooking.mp3" type="audio/mpeg"></source>
 					</audio>
 				<Celebrity setScore = {this.processScore.bind(this)} imageLink = {this.state.celeb_to_pass.imageLink} age = {this.state.celeb_to_pass.age}
 				height = {this.state.celeb_to_pass.height} weight = {this.state.celeb_to_pass.weight}
