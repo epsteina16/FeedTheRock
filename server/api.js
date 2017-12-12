@@ -6,6 +6,8 @@ var mongoose = require('mongoose');
 var schedule = require('node-schedule');
 var request = require('request');
 
+const https = require('https');
+
 var router = express.Router();
 
 router.use(bodyParser.json());
@@ -154,32 +156,36 @@ var j = schedule.scheduleJob('/30 * * * * *', function(){
 	console.log("MEMEING");
 	console.log(recipes[count]);
 	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
-	request(url, function(error, response, body){
-		if (!error && response.statusCode == 200) {
-			var result = response.body;
-			//console.log(body);
-			console.log(result.q);
-			var recipe;
-			for (var i = 0; i < result.hits.length; i++){
-				recipe = result.hits[i].recipe;
-				console.log(recipe);
-				var newMeal = new meals({
-					recipe: recipe.label,
-					image: recipe.image,
-					calories: recipe.calories,
-					totalNutrients: recipe.totalNutrients
-				});
+	
+	https.get('https://encrypted.google.com/', (res) => {
+	  console.log('statusCode:', res.statusCode);
+	  console.log('headers:', res.headers);
 
-				newMeal.save(function(err, result){
-					if (err) {
-						console.log(err);
-					}
-				});
-			}
-		} else {
-			console.log(response.statusCode);
-			console.log(error);
+	  res.on('data', (d) => {
+	  	var result = d;
+		//console.log(body);
+		console.log(result.q);
+		var recipe;
+		for (var i = 0; i < result.hits.length; i++){
+			recipe = result.hits[i].recipe;
+			console.log(recipe);
+			var newMeal = new meals({
+				recipe: recipe.label,
+				image: recipe.image,
+				calories: recipe.calories,
+				totalNutrients: recipe.totalNutrients
+			});
+
+			newMeal.save(function(err, result){
+				if (err) {
+					console.log(err);
+				}
+			});
 		}
+	  });
+
+	}).on('error', (e) => {
+	  console.error(e);
 	});
 
 	count++;
