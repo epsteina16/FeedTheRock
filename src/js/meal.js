@@ -1,6 +1,9 @@
 //TODO:
+//add edamam to db
 //pan animation
-//show nutrition for meal
+//button styling
+//text styling
+//background images
 
 import React from "react";
 import PickMeal from "./PickMeal";

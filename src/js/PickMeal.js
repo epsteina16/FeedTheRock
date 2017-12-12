@@ -88,7 +88,29 @@ export default class PickMeal extends React.Component {
 
 	//called when breakfast is chosen
 	onMealSelected = (event, { suggestion, suggestionValue }) => {
-		this.setState({mealChosen: true, image: suggestion.pic, value: suggestion.label, nutrients: suggestion.nutrition});
+		var nutrients = suggestion.nutrition;
+		if (nutrients.calories == undefined) {
+			nutrients.calories = 0;
+		}
+		if (nutrients.CHOCDF == undefined){
+			nutrients.CHOCDF.quantity = 0;
+		}
+		if (nutrients.SUGAR == undefined){
+			nutrients.SUGAR.quantity = 0;
+		}
+		if (nutrients.PROCNT == undefined){
+			nutrients.PROCNT.quantity = 0;
+		}
+		if (nutrients.FASAT == undefined){
+			nutrients.FASAT.quantity = 0;
+		}
+		if (nutrients.CHOLE == undefined){
+			nutrients.CHOLE.quantity = 0;
+		}
+		if (nutrients.NA == undefined){
+			nutrients.NA.quantity = 0;
+		}
+		this.setState({mealChosen: true, image: suggestion.pic, value: suggestion.label, nutrients: nutrients});
 	}
 
 	//called to cook
@@ -130,15 +152,16 @@ export default class PickMeal extends React.Component {
 					</div>
 					<div class="meal-ingredients">
 						<h3>Nutrition Facts per Recipe</h3>
-						<p>Calories: { this.state.nutrients.calories }</p>
-						<p>Fat: { this.state.nutrients.FAT.quantity }g</p>
-						<p>Carbohydrates: { this.state.nutrients.CHOCDF.quantity }g</p>
-						<p>Sugar: {this.state.nutrients.SUGAR.quantity}g</p>
-						<p>Protein: {this.state.nutrients.PROCNT.quantity}g</p>
+						<p>Calories: { Math.floor(this.state.nutrients.calories) }</p>
+						<p>Fat: { Math.floor(this.state.nutrients.FAT.quantity) }g</p>
+						<p>Carbohydrates: { Math.floor(this.state.nutrients.CHOCDF.quantity) }g</p>
+						<p>Sugar: { Math.floor(this.state.nutrients.SUGAR.quantity)}g</p>
+						<p>Protein: {Math.floor(this.state.nutrients.PROCNT.quantity)}g</p>
 					</div>
 				</div>
 				): (<br />) }
 				<div class="meal-choose">
+					{ !this.state.mealChosen ? (
 					<Autosuggest
 				        suggestions={suggestions}
 				        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -148,8 +171,9 @@ export default class PickMeal extends React.Component {
 				        inputProps={inputProps}
 				        onSuggestionSelected={this.onMealSelected}
 				      />
+				      ) : (<br />)}
 					{ this.state.mealChosen ? 
-							(<div id="slider"><label for="meal-amount">Number of portions: </label><input id="meal-amount" type="range" min="0.1" max="5" /></div>) 
+							(<div id="slider"><label for="meal-amount">Number of portions: </label><input id="meal-amount" type="range" step="0.5" min="0.1" max="5" /></div>) 
 							: (<br />)
 					}
 				</div>

@@ -3,6 +3,9 @@ var cookieParser = require('cookie-parser');
 var express = require('express');
 var mongoose = require('mongoose');
 
+var schedule = require('node-schedule');
+var request = require('request');
+
 var router = express.Router();
 
 router.use(bodyParser.json());
@@ -141,5 +144,14 @@ router.get("/getTopTen", function(req, res){
 			response.send(500);
 		}
 	})
-})
+});
+
+const recipes = ["egg", "pancakes", "waffles", "french toast", "eggs and potatoes", "corned beef hash", "cereal", "scrambled eggs", "oatmeal", "fruit", "breakfast burrito", "yogurt", "parfait", "burrito", "quesadilla", "sushi", "sandwich", "pasta", "curry", "wrap", "burger", "hot dog", "soup", "salad", "rice", "beans", "shrimp", "steak", "tempura", "duck", "lamb", "vegetarian", "pizza", "pasta and meatballs", "tikka masala", "grilled", "fried"]
+var count = 0;
+
+var j = schedule.scheduleJob('*/5 * * * *', function(){
+	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
+	request = 
+});
+
 module.exports = router;
