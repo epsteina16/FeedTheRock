@@ -169,10 +169,41 @@ a {
     padding: 14px;
 }
 
+.startbuttoncenter {
+	margin-top: 5%;
+	margin-bottom: 15%;
+	display: block;
+	margin: auto;
+    width: 60%;
+    height: 30%;
+    padding: 14px;
+}
+
+
 .textcenter {
 	margin-top: 5%;
 	margin-bottom: 3%;
 	text-align: center;
+}
+
+.textcenter_first {
+	margin-top: 2%;
+	margin-bottom: 2%;
+	text-align: center;
+}
+
+.textcenter_italic {
+	margin-top: 5%;
+	margin-bottom: 3%;
+	text-align: center;
+	font-style: italic;
+}
+
+.textcenter_bold {
+	margin-top: 5%;
+	margin-bottom: 3%;
+	text-align: center;
+	font-weight: bold;
 }
 
 .container {
