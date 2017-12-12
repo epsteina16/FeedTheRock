@@ -59,13 +59,77 @@
 		margin-right: 10px;
 	}
 
+	.textcenter {
+	margin-top: 5%;
+	margin-bottom: 3%;
+	text-align: center;
+	}
+
+	.lcontainer {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	}
+
+	.rcontainer {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+	}
+
+	.lattribute-data {
+		flex-grow: 1;
+		order: 1;
+	}
+
+
+	.sideattribute {
+		flex: none;
+		font-size: 14px;
+	}
 	/* Home component */
 
 
+	.celebrityphoto {
+		flex-grow: 2;
+		order: 2;
+		max-width: 50%;
+	}
 
+	.rattribute-data {
+		flex-grow: 1;
+		order: 3;
+	}
 
+	.score {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: #3498db;
+		padding: 5px;
+		border-bottom: 1px solid #bdc3c7;
+		border-right: 1px solid #bdc3c7;
+	}
 
+	#clicker {
+		padding-top: 15px;
+	}
 
+	#clicker button {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
+	.gobuttoncenter {
+		margin-top: 5%;
+		margin-bottom: 15%;
+		display: block;
+		margin: auto;
+	    width: 40%;
+	    padding: 14px;
+	}
 
 
 }
