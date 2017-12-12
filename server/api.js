@@ -20,6 +20,7 @@ router.get("/getThreeCelebrities", function(req, res){
 			return res.status(500);
 		}
 		var objArray = obj;
+		console.log("length of Array is " + objArray.length);
 		var threeCelebs = [];
 		var celeb;
 		for(var i = 0; i < 3; i++){
