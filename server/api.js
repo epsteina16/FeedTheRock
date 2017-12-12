@@ -19,7 +19,7 @@ router.get("/getThreeCelebrities", function(req, res){
 		if (err) {
 			return res.status(500);
 		}
-		var objArray = JSON.parse(obj);
+		var objArray = obj;
 		var rando = Math.random();
 		var tenCelebs = [];
 		var celeb;
