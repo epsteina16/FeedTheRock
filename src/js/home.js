@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 const app = document.getElementById('app');
-import Celebrity from "./Celebrity"
+import Celebrity from "./Celebrity";
+import Highscore from "./Highscore";
 
 var celeb_url = "https://feedtherock.herokuapp.com/api/getThreeCelebrities";
 
@@ -16,6 +17,7 @@ class Main extends React.Component {
 			celeb_to_pass : undefined,
 			difficulty : undefined,
 			currentDisplay : true,
+			score : 0
 		}
 	}
 
@@ -36,6 +38,7 @@ class Main extends React.Component {
 	}
 
 	render() {
+		/*
 		if(this.state.gamestate == 1){
 			return (
 				<div>
@@ -70,6 +73,9 @@ class Main extends React.Component {
 				<audio autoPlay>
 						<source src="audio/cooking.mp3" type="audio/mpeg"></source>
 					</audio>
+
+				<div class = "score">Score {this.state.score}</div>
+
 				<Celebrity setScore = {this.processScore.bind(this)} imageLink = {this.state.celeb_to_pass.imageLink} age = {this.state.celeb_to_pass.age}
 				height = {this.state.celeb_to_pass.height} weight = {this.state.celeb_to_pass.weight}
 				name = {this.state.celeb_to_pass.name} gender = {this.state.celeb_to_pass.gender}
@@ -79,7 +85,8 @@ class Main extends React.Component {
 				</div>
 			);
 		}
-		if(this.state.gamestate == 3){
+		*/
+		if(this.state.gamestate == 1){
 			return (
 				<div>
 				<Highscore score = {this.state.score}/>
