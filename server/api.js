@@ -6,6 +6,8 @@ var mongoose = require('mongoose');
 var schedule = require('node-schedule');
 var request = require('request');
 
+const https = require('https');
+
 var router = express.Router();
 
 router.use(bodyParser.json());
@@ -147,34 +149,73 @@ router.get("/getTopTen", function(req, res){
 	})
 });
 
-const recipes = ["egg", "pancakes", "waffles", "french toast", "eggs and potatoes", "corned beef hash", "cereal", "scrambled eggs", "oatmeal", "fruit", "breakfast burrito", "yogurt", "parfait", "burrito", "quesadilla", "sushi", "sandwich", "pasta", "curry", "wrap", "burger", "hot dog", "soup", "salad", "rice", "beans", "shrimp", "steak", "tempura", "duck", "lamb", "vegetarian", "pizza", "pasta and meatballs", "tikka masala", "grilled", "fried"]
-var count = 0;
+router.post("/addMeal", function(req, res){
+	console.log(req.body);
+	var recipe = req.body.recipe;
+	var image = req.body.image;
+	var calories = req.body.calories;
+	var totalNutrients = req.body.totalNutrients;
+	var healthLabels = req.body.healthLabels;
+	var dietLabels = req.body.dietLabels;
+	console.log(recipe);
+	
+	var newMeal = new meals({
+		recipe: recipe,
+		image: image,
+		calories: calories,
+		totalNutrients: totalNutrients,
+		healthLabels: healthLabels,
+		dietLabels: dietLabels
+	});
 
-var j = schedule.scheduleJob('/30 * * * * *', function(){
-	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
-	request(url, function(error, response, body){
-		if (!error && response.status == 200) {
-			var result = body;
-			var recipe;
-			for (var i = 0; i < result.hits.length; i++){
-				recipe = result.hits[i].recipe;
-				var newMeal = new meals({
-					recipe: recipe.label,
-					image: recipe.image,
-					calories: recipe.calories,
-					totalNutrients: recipe.totalNutrients
-				});
-
-				newMeal.save(function(err, result){
-					if (err) {
-						console.log(err);
-					}
-				});
-			}
+	newMeal.save(function(err, result){
+		if (err) {
+			console.log(err);
 		}
 	});
 
-	count++;
+	return res.status(200).send();
 });
+
+
+/*var j = schedule.scheduleJob('/30 * * * * *', function(){
+	console.log("MEMEING");
+	console.log(recipes[count]);
+	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
+	
+	https.get('https://encrypted.google.com/', (res) => {
+	  console.log('statusCode:', res.statusCode);
+	  console.log('headers:', res.headers);
+
+	  res.on('data', (d) => {
+	  	console.log(d);
+	  	var result = d;
+		//console.log(body);
+		console.log(result.q);
+		var recipe;
+		for (var i = 0; i < result.hits.length; i++){
+			recipe = result.hits[i].recipe;
+			console.log(recipe);
+			var newMeal = new meals({
+				recipe: recipe.label,
+				image: recipe.image,
+				calories: recipe.calories,
+				totalNutrients: recipe.totalNutrients
+			});
+
+			newMeal.save(function(err, result){
+				if (err) {
+					console.log(err);
+				}
+			});
+		}
+	  });
+
+	}).on('error', (e) => {
+	  console.error(e);
+	});
+
+	count++;
+});*/
 
 module.exports = router;

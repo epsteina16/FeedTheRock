@@ -1,9 +1,6 @@
 //TODO:
 //add edamam to db
 //pan animation
-//button styling
-//text styling
-//background images
 
 import React from "react";
 import PickMeal from "./PickMeal";
@@ -41,6 +38,7 @@ export default class Meal extends React.Component {
 	}
 
 	sendData() {
+		console.log(this.state.nutrients);
 		this.props.feed(this.state.nutrients);
 	}
 
@@ -132,38 +130,41 @@ export default class Meal extends React.Component {
 		}
 		else {
 			return (
+				<div>
+				<img src="backgroundimages/burger.jpeg" id="celebbackground" />
 				<div class="meal-container">
 				<h2>Pick Your Meals</h2>
 
 				{this.state.breakfastChosen ? (
-					<p> { this.state.breakfast } </p>
+					<p class="chosenMeal"> { this.state.breakfast } </p>
 				) : (
-					<div>
-					<button onClick={ this.makeBreakfast.bind(this) }>Make Breakfast</button>
+					<div class="mealButton">
+					<button class="btn btn-block btn-lg btn-default" onClick={ this.makeBreakfast.bind(this) }>Make Breakfast</button>
 					<br />
 					</div>
 				)}
 
 				{this.state.lunchChosen ? (
-					<p> { this.state.lunch } </p>
+					<p class="chosenMeal"> { this.state.lunch } </p>
 				) : (
-					<div>
-					<button onClick={ this.makeLunch.bind(this) }>Make Lunch</button>
+					<div class="mealButton"> 
+					<button class="btn btn-block btn-lg btn-default" onClick={ this.makeLunch.bind(this) }>Make Lunch</button>
 					<br />
 					</div>
 				)}
 
 				{this.state.dinnerChosen ? (
-					<p> { this.state.dinner } </p>
+					<p class="chosenMeal"> { this.state.dinner } </p>
 				) : (
-					<div>
-					<button onClick={ this.makeDinner.bind(this) }>Make Dinner</button>
+					<div class="mealButton"> 
+					<button class="btn btn-block btn-lg btn-default" onClick={ this.makeDinner.bind(this) }>Make Dinner</button>
 					<br />
 					</div>
 				)}
 
 
-				<button onClick={this.cookClicked.bind(this)} disabled={!this.state.breakfastChosen || !this.state.lunchChosen || !this.state.dinnerChosen}>Cook!</button>
+				<button class="btn btn-block btn-lg btn-info cookbtn" onClick={this.cookClicked.bind(this)} disabled={!this.state.breakfastChosen || !this.state.lunchChosen || !this.state.dinnerChosen}>Cook!</button>
+				</div>
 				</div>
 			);
 		}
