@@ -21,14 +21,16 @@ export default class Celebrity extends React.Component {
 			isGlutenFree: this.props.isGlutenFree,
 			exerciseLevel: this.props.exerciseLevel,
 			partyLevel: this.props.partyLevel,
+			difficulty: this.props.difficulty,
 			currentDisplay: true
-		}
+
+		}                   
 	}
 // variable that keeps track of showing celebrity or our meal component
 
 	setCharacteristics() {
 		this.setState({
-				score: this.props.score,
+				score: 0,
 				imageLink: this.props.imageLink,
 				age: this.props.age,
 				height: this.props.height,
@@ -115,62 +117,78 @@ export default class Celebrity extends React.Component {
 	render() {
 		var exerciseState;
 		if (this.state.exerciseLevel == "Sedentary") {
-			exerciseState = "Sofft boi";
+			exerciseState = "Sedentary";
 		}
 		else if (this.state.exerciseLevel == "Lightly Active") {
-			exerciseState = "Harddd boi";
+			exerciseState = "Lightly Active";
 		}
 		else if (this.state.exerciseLevel == "Moderately Active") {
-			exerciseState = "Harddd boi";
+			exerciseState = "Moderately Active";
 		}
 		else if (this.state.exerciseLevel == "Very Active") {
-			exerciseState = "Harddd boi";
+			exerciseState = "Very Active";
 		}
 		else if (this.state.exerciseLevel == "Extra Active") {
-			exerciseState = "Harddd boi";
+			exerciseState = "Extremely Active";
 		}
 
 		var partyState;
 		if (this.state.partyLevel == "Low") {
-			partyState = "Sofft boi";
+			partyState = "Doesn't party";
 		}
 		else if (this.state.partyLevel == "Medium") {
-			partyState = "Harddd boi";
+			partyState = "Parties some";
 		}
 		else if (this.state.partyLevel == "High") {
-			partyState = "Harddd boi";
+			partyState = "Parties hard";
 		}
-
-		return (
+		var level;
+		if (this.state.difficulty == "Easy") {
+			level = "Easy";
+		}
+		else if (this.state.difficulty == "Medium") {
+			level = "Medium";
+		}
+		else if (this.state.difficulty == "Hard") {
+			level = "Hard";
+		}
+		
+		if (level == "Easy") {
+			return (
 			<div>
 		{this.state.currentDisplay ?
 			(
 				<div>
 				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
-				<h1>Your Celebrity is: {this.state.name}</h1>
-				<div>{this.state.age} years old</div>
-				<div>{Math.floor(this.state.height / 12)}&rsquo; {this.state.height % 12}&quot; </div>
-				<div>{this.state.weight} lbs</div>
-				<div>{this.state.gender}</div>
-				<div>{this.state.age} years old</div>
-				{this.state.isVegan ? 
-						(<div>Vegan</div>) 
-						: (<div></div>)
-				}
-				{this.state.isVegetarian ? 
-						(<div>Vegitarian</div>) 
-						: (<div></div>)
-				}
-				{this.state.isGlutenFree ? 
-						(<div>Gluten Free</div>) 
-						: (<div></div>)
-				}
-				<div>{exerciseState}</div>			
-				<div>{partyState}</div>
+				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<div class = "container">
+					<div class = "lattribute-data lcontainer">
+						<h6 class = "sideattribute">{this.state.age} years old</h6>
+						<h6 class = "sideattribute">{Math.floor(this.state.height / 12)}&rsquo; {this.state.height % 12}&quot; </h6>
+						<h6 class = "sideattribute">{this.state.weight} lbs</h6>
+						{this.state.isGlutenFree ? 
+								(<h6 class = "sideattribute">Gluten Free</h6>) 
+								: (<h6 class = "sideattribute">Eats Gluten</h6>)
+						}
+						<h6 class = "sideattribute">{exerciseState}</h6>	
+					</div>
+					<div class = "rattribute-data rcontainer">
+						<h6 class = "sideattribute">{this.state.gender}</h6>
+						{this.state.isVegan ? 
+								(<h6 class = "sideattribute">Vegan</h6>) 
+								: (<h6 class = "sideattribute">Not Vegan</h6>)
+						}
+						{this.state.isVegetarian ? 
+								(<h6 class = "sideattribute">Vegetarian</h6>) 
+								: (<h6 class = "sideattribute">Not Vegetarian</h6>)
+						}
+						<h6 class = "sideattribute">{partyState}</h6>
+					</div>
 
-				<img class="img-rounded" src={this.state.imageLink}alt="Celebrity image"></img>
+					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+				</div>
 
-				<button class = "btn-info" class = "btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
+				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
 				</div>
 				
 			) 
@@ -181,7 +199,125 @@ export default class Celebrity extends React.Component {
 		}
 		</div>
 		);
+		}
+		else if (level == "Medium") {
+			return (
+			<div>
+		{this.state.currentDisplay ?
+			(
+				<div>
+				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
+				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<div class = "container">
+					<div class = "lattribute-data lcontainer">
+						{this.state.isGlutenFree ? 
+								(<h6 class = "sideattribute">Gluten Free</h6>) 
+								: (<h6 class = "sideattribute">Eats Gluten</h6>)
+						}
+						<h6 class = "sideattribute">{exerciseState}</h6>	
+					</div>
+					<div class = "rattribute-data rcontainer">
+						{this.state.isVegan ? 
+								(<h6 class = "sideattribute">Vegan</h6>) 
+								: (<h6 class = "sideattribute">Not Vegan</h6>)
+						}
+						{this.state.isVegetarian ? 
+								(<h6 class = "sideattribute">Vegetarian</h6>) 
+								: (<h6 class = "sideattribute">Not Vegetarian</h6>)
+						}
+					</div>
 
+					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+				</div>
+
+				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
+				</div>
+				
+			) 
+		:
+			(
+				<Meal feed={this.generateScore.bind(this)}/>
+			)
+		}
+		</div>
+		);
+		}
+		else if (level == "Hard") {
+			return (
+			<div>
+		{this.state.currentDisplay ?
+			(
+				<div>
+				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
+				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<div class = "container">
+					<div class = "lattribute-data lcontainer">
+					</div>
+					<div class = "rattribute-data rcontainer">
+					</div>
+
+					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+				</div>
+
+				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
+				</div>
+				
+			) 
+		:
+			(
+				<Meal feed={this.generateScore.bind(this)}/>
+			)
+		}
+		</div>
+		);
+		}
+		else {
+			return (
+			<div>
+		{this.state.currentDisplay ?
+			(
+				<div>
+				<img src="backgroundimages/pickcelebritybackground.jpg" id="celebbackground" />
+				<h2 class = "textcenter">Your Celebrity is: {this.state.name}</h2>
+				<div class = "container">
+					<div class = "lattribute-data lcontainer">
+						<h6 class = "sideattribute">{this.state.age} years old</h6>
+						<h6 class = "sideattribute">{Math.floor(this.state.height / 12)}&rsquo; {this.state.height % 12}&quot; </h6>
+						<h6 class = "sideattribute">{this.state.weight} lbs</h6>
+						{this.state.isGlutenFree ? 
+								(<h6 class = "sideattribute">Gluten Free</h6>) 
+								: (<h6 class = "sideattribute">Eats Gluten</h6>)
+						}
+						<h6 class = "sideattribute">{exerciseState}</h6>	
+					</div>
+					<div class = "rattribute-data rcontainer">
+						<h6 class = "sideattribute">{this.state.gender}</h6>
+						{this.state.isVegan ? 
+								(<h6 class = "sideattribute">Vegan</h6>) 
+								: (<h6 class = "sideattribute">Not Vegan</h6>)
+						}
+						{this.state.isVegetarian ? 
+								(<h6 class = "sideattribute">Vegetarian</h6>) 
+								: (<h6 class = "sideattribute">Not Vegetarian</h6>)
+						}
+						<h6 class = "sideattribute">{partyState}</h6>
+					</div>
+
+					<img class="img-rounded celebrityphoto" src={this.state.imageLink}alt="Celebrity image"></img>
+				</div>
+
+				<button class = "gobuttoncenter btn-info btn-hg" onClick={this.toggleDisplay.bind(this)}>LETS GO!</button>
+				</div>
+				
+			) 
+		:
+			(
+				<Meal feed={this.generateScore.bind(this)}/>
+			)
+		}
+		</div>
+		);
+		}
 	}
 
 }
