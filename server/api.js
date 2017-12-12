@@ -150,6 +150,7 @@ router.get("/getTopTen", function(req, res){
 });
 
 router.post("/addMeal", function(req, res){
+	console.log(req.body);
 	var recipe = req.body.recipe;
 	var image = req.body.image;
 	var calories = req.body.calories;
