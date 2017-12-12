@@ -188,7 +188,7 @@ router.get("/getMeal", function(req, res){
 		return res.status(500).send();
 	}
 
-	meals.find({recipe: recipeName}, function(err, recipes){
+	meals.find({recipe: /.*recipeName*./}, function(err, recipes){
 		if (err || !recipes) {
 			return res.status(500).send();
 		}
