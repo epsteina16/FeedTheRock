@@ -149,15 +149,18 @@ router.get("/getTopTen", function(req, res){
 	})
 });
 
+//used to add meals to db
 router.post("/addMeal", function(req, res){
-	console.log(req.body);
 	var recipe = req.body.recipe;
 	var image = req.body.image;
 	var calories = req.body.calories;
 	var totalNutrients = req.body.totalNutrients;
 	var healthLabels = req.body.healthLabels;
 	var dietLabels = req.body.dietLabels;
-	console.log(recipe);
+
+	if (recipe == undefined || image == undefined || calories == undefined || totalNutrients == undefined || healthLabels == undefined || dietLabels == undefined) {
+		return res.status(500).send();
+	}
 	
 	var newMeal = new meals({
 		recipe: recipe,
@@ -177,45 +180,22 @@ router.post("/addMeal", function(req, res){
 	return res.status(200).send();
 });
 
+//used to get meals from db
+router.get("/getMeal", function(req, res){
+	var recipeName = req.query.recipeName;
 
-/*var j = schedule.scheduleJob('/30 * * * * *', function(){
-	console.log("MEMEING");
-	console.log(recipes[count]);
-	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
-	
-	https.get('https://encrypted.google.com/', (res) => {
-	  console.log('statusCode:', res.statusCode);
-	  console.log('headers:', res.headers);
+	if (recipeName == undefined) {
+		return res.status(500).send();
+	}
 
-	  res.on('data', (d) => {
-	  	console.log(d);
-	  	var result = d;
-		//console.log(body);
-		console.log(result.q);
-		var recipe;
-		for (var i = 0; i < result.hits.length; i++){
-			recipe = result.hits[i].recipe;
-			console.log(recipe);
-			var newMeal = new meals({
-				recipe: recipe.label,
-				image: recipe.image,
-				calories: recipe.calories,
-				totalNutrients: recipe.totalNutrients
-			});
-
-			newMeal.save(function(err, result){
-				if (err) {
-					console.log(err);
-				}
-			});
+	meals.find({recipe: recipeName}, function(err, recipes){
+		if (err !! !celeb) {
+			return res.status(500).send();
 		}
-	  });
-
-	}).on('error', (e) => {
-	  console.error(e);
+		else {
+			return res.status(200).send(recipes);
+		}
 	});
-
-	count++;
-});*/
+});
 
 module.exports = router;
