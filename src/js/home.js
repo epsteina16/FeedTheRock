@@ -19,8 +19,7 @@ class Main extends React.Component {
 		return (
 			<button onClick={function(){
 				$.get(celeb_url, function(obj, err){
-						JSON.parse(obj);
-						console.log(obj);
+						console.log(obj[0].name);
 						this.state.celebs[0] = obj[0];
 						this.state.celebs[1] = obj[1];
 						this.state.celebs[2] = obj[2];
