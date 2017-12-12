@@ -1,6 +1,14 @@
 @media screen and (max-width: 700px) {
 	h2 {
-		font-size: 24px;
+		font-size: 26px;
+	}
+
+	h3 {
+		font-size: 22px;
+	}
+
+	h4 {
+		font-size: 18px;
 	}
 
 	/*pick meal component*/
@@ -36,12 +44,11 @@
 
 	#pan {
 		width: 80%;
-		padding: 0;
+		display: inline-block;
 	}
 
-	#pan-btn {
-		width: 50%;
-		display: inline-block;
+	#pan img{
+		max-width: 100%;
 	}
 
 
@@ -82,6 +89,8 @@
 		flex: none;
 		font-size: 14px;
 	}
+	/* Home component */
+
 
 	.celebrityphoto {
 		flex-grow: 2;
