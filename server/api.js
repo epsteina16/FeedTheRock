@@ -120,7 +120,7 @@ router.post("/addhighscore", function(req, res){
 router.get("/getTopTen", function(req, res){
 	highscore.find({}, function(err, highscores) {
 		if (!err) {
-			var sortedScores = JSON.parse(highscores);
+			var sortedScores = highscores;
 			sortedScores.sort(function(a,b) {
 				return b.score - a.score;
 			});
