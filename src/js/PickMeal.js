@@ -125,7 +125,7 @@ export default class PickMeal extends React.Component {
 	      	$(this).removeClass();
     	});
 
-		if (this.state.cookingTimeLeft == 0) {
+		if (this.state.cookingTimeLeft == 1) {
 			var meal = new Object();
 			meal.amount = parseInt($("#meal-amount").val());
 			meal.recipe = this.state.value;
@@ -149,6 +149,8 @@ export default class PickMeal extends React.Component {
 	    };
 
 		return (
+			<div>
+			<img src="backgroundimages/spam.jpg" id="celebbackground" />
 			<div class="meal">
 				<h2> {this.props.mealName} {this.state.mealChosen ? (": " + this.state.value) : ("")}</h2>
 				{ this.state.mealChosen ? (
@@ -157,7 +159,7 @@ export default class PickMeal extends React.Component {
 							<img src={ this.state.image } alt="Meal"></img>
 					</div>
 					<div class="meal-ingredients">
-						<h3>Nutrition Facts per Recipe</h3>
+						<h5>Nutrition Facts per Recipe</h5>
 						<p>Calories: { Math.floor(this.state.nutrients.calories) }</p>
 						<p>Fat: { Math.floor(this.state.nutrients.FAT.quantity) }g</p>
 						<p>Carbohydrates: { Math.floor(this.state.nutrients.CHOCDF.quantity) }g</p>
@@ -179,7 +181,7 @@ export default class PickMeal extends React.Component {
 				      />
 				      ) : (<br />)}
 					{ this.state.mealChosen ? 
-							(<div id="slider"><label for="meal-amount">Number of portions: </label><input id="meal-amount" type="range" step="0.5" min="0.1" max="5" /></div>) 
+							(<div id="slider"><label for="meal-amount">Number of portions: </label><input id="meal-amount" type="range" step="0.5" min="0.5" max="5" /></div>) 
 							: (<br />)
 					}
 				</div>
@@ -194,6 +196,7 @@ export default class PickMeal extends React.Component {
 						<p>Food is fuel!</p>
 					)
 				}
+			</div>
 			</div>
 		)
 	}

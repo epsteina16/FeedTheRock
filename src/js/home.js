@@ -23,6 +23,7 @@ class Main extends React.Component {
 	processScore(score){
 		this.setState({score : this.state.score + score});
 		console.log(score);
+		if(this.state.value + 1 == 3){
 		this.setState({round_check : this.state.round_check + 1});
 		this.setState({value : this.state.value + 1});
 		console.log(this.state.celebs[this.state.value].name);
@@ -30,6 +31,12 @@ class Main extends React.Component {
 		if(this.state.round_check == 3){
 			this.state.gamestate = 3;
 		}
+		else {
+			this.setState({value : this.state.value + 1});
+			console.log(this.state.celebs[this.state.value + 1]);
+			this.setState({celeb_to_pass : this.state.celebs[this.state.value + 1]});
+		}
+		
 	}
 
 	render() {
@@ -53,6 +60,7 @@ class Main extends React.Component {
 							console.log(obj[0].exerciseLevel);
 							console.log(obj[0].partyLevel);
 							this.setState({celebs : obj});
+							this.setState({value : this.state.value});
 							this.setState({celeb_to_pass : this.state.celebs[this.state.value]});
 							console.log("difficulty is" + this.state.difficulty);
 							this.setState({gamestate : 2});
