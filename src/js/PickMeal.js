@@ -107,6 +107,12 @@ export default class PickMeal extends React.Component {
 		if (nutrients.CHOLE == undefined){
 			nutrients.CHOLE.quantity = 0;
 		}
+		if (nutrients.FIBTG == undefined){
+			nutrients.FIBTG.quantity = 0;
+		}
+		if (nutrients.FAT == undefined){
+			nutrients.FAT.quantity = 0;
+		}
 		if (nutrients.NA == undefined){
 			nutrients.NA.quantity = 0;
 		}
