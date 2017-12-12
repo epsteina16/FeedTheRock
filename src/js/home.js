@@ -39,6 +39,7 @@ class Main extends React.Component {
 						<option value="Hard"> Hard </option> 
 					</select>
 				<button onClick={function(){
+
 					var x = document.getElementById(selected.value);
 					this.setState({difficulty : selected.value});
 					$.get(celeb_url, function(obj, err){
@@ -57,6 +58,9 @@ class Main extends React.Component {
 		if(this.state.gamestate == 2){
 			return (
 				<div>
+				<audio autoPlay>
+						<source src="audio/cooking.mp3" type="audio/mpeg"> </source>
+					</audio>
 				<Celebrity setScore = {this.processScore.bind(this)} imageLink = {this.state.celeb_to_pass.imageLink} age = {this.state.celeb_to_pass.age}
 				height = {this.state.celeb_to_pass.height} weight = {this.state.celeb_to_pass.weight}
 				name = {this.state.celeb_to_pass.name} gender = {this.state.celeb_to_pass.gender}
