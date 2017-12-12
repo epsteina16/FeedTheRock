@@ -114,6 +114,7 @@ export default class Celebrity extends React.Component {
 		// Score has been created
 		console.log(this.state.score);
 		this.props.setScore(this.state.score);
+		this.setState({currentDisplay : true});
 	}
 
 	render() {
