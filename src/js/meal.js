@@ -41,6 +41,7 @@ export default class Meal extends React.Component {
 	}
 
 	sendData() {
+		console.log(this.state.nutrients);
 		this.props.feed(this.state.nutrients);
 	}
 

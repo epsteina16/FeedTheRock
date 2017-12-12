@@ -45,6 +45,7 @@ export default class Celebrity extends React.Component {
 			});
 	}
 	generateScore(nutrients) {
+		console.log(nutrients);
 		// Calculate score
 		var score;
 		var bmr;

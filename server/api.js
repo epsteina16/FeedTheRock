@@ -149,8 +149,23 @@ router.get("/getTopTen", function(req, res){
 	})
 });
 
-const recipes = ["egg", "pancakes", "waffles", "french toast", "eggs and potatoes", "corned beef hash", "cereal", "scrambled eggs", "oatmeal", "fruit", "breakfast burrito", "yogurt", "parfait", "burrito", "quesadilla", "sushi", "sandwich", "pasta", "curry", "wrap", "burger", "hot dog", "soup", "salad", "rice", "beans", "shrimp", "steak", "tempura", "duck", "lamb", "vegetarian", "pizza", "pasta and meatballs", "tikka masala", "grilled", "fried"]
-var count = 0;
+router.post("/addMeal", function(req, res){
+	var recipe = req.body.recipe;
+	if (recipe == undefined){
+		return res.status(500).send();
+	}
+	var newMeal = new meals({
+		recipe: recipe
+	});
+
+	newMeal.save(function(err, result){
+		if (err) {
+			console.log(err);
+		}
+	});
+
+});
+
 
 /*var j = schedule.scheduleJob('/30 * * * * *', function(){
 	console.log("MEMEING");
