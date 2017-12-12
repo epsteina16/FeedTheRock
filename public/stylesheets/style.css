@@ -7,6 +7,7 @@ a {
   color: #00B7FF;
 }
 
+
 .meal-container {
 	width: 80%;
 	left: 20%;
@@ -131,6 +132,27 @@ a {
 #slider {
 	display: inline-block;
 	padding: 20px;
+}
+
+.portionslabel {
+	font-weight: normal;
+  	font-size: 20px;
+  	line-height: 2.3;
+}
+
+.portionamount {
+  	margin: 30px;
+  	border: none;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.4;
+  border-radius: 4px;
+  padding: 10px 15px;
+  color: #34495E;
+  background-color: #ECF0F1;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
 }
 
 .meal {

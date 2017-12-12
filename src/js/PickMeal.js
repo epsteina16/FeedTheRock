@@ -193,9 +193,9 @@ export default class PickMeal extends React.Component {
 						<p>Sugar: { Math.floor(this.state.nutrients.SUGAR.quantity)}g</p>
 						<p>Protein: {Math.floor(this.state.nutrients.PROCNT.quantity)}g</p>
 						<div id="clicker">
-							Portions:
+							<div class = "portionslabel"> Portions: </div>
 							<button onClick={ () => this.modifyQuantity(0.2) }><span class="fui-triangle-up"></span></button>
-							<span id="quantity">1</span>
+							<span id="quantity" class = "portionamount">1</span>
 							<button onClick={ () => this.modifyQuantity(-0.2) }><span class="fui-triangle-down"></span></button>
 						</div>
 					</div>
