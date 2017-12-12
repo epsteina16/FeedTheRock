@@ -135,7 +135,11 @@ export default class Meal extends React.Component {
 				<h2>Pick Your Meals</h2>
 
 				{this.state.breakfastChosen ? (
-					<div class="chosenMeal"> { this.state.breakfast } </div>
+					<div>
+					<div class="chosenMeal"> { this.state.breakfast }</div>
+					<br />
+					</div>
+					
 				) : (
 					<div class="mealButton">
 					<button class="btn btn-block btn-lg btn-default" onClick={ this.makeBreakfast.bind(this) }>Make Breakfast</button>
@@ -144,7 +148,11 @@ export default class Meal extends React.Component {
 				)}
 
 				{this.state.lunchChosen ? (
-					<div class="chosenMeal"> { this.state.lunch } </div>
+					<div>
+					<div class="chosenMeal"> { this.state.lunch }</div>
+					<br />
+					</div>
+					
 				) : (
 					<div class="mealButton"> 
 					<button class="btn btn-block btn-lg btn-default" onClick={ this.makeLunch.bind(this) }>Make Lunch</button>
@@ -153,7 +161,11 @@ export default class Meal extends React.Component {
 				)}
 
 				{this.state.dinnerChosen ? (
-					<div class="chosenMeal"> { this.state.dinner } </div>
+					<div>
+					<div class="chosenMeal"> { this.state.dinner }</div>
+					<br />
+					</div>
+					
 				) : (
 					<div class="mealButton"> 
 					<button class="btn btn-block btn-lg btn-default" onClick={ this.makeDinner.bind(this) }>Make Dinner</button>
