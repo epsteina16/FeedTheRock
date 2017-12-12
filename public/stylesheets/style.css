@@ -207,6 +207,7 @@ a {
 #pan {
 	max-width: 100%;
 	padding: 50px;
+	display: block;
 }
 
 #celebbackground {
