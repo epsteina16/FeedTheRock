@@ -154,7 +154,7 @@ router.post("/addMeal", function(req, res){
 	console.log(recipe);
 	
 	var newMeal = new meals({
-		recipe: recipe
+		recipe: JSON.parse(recipe);
 	});
 
 	newMeal.save(function(err, result){
