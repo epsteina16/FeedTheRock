@@ -32,8 +32,8 @@ router.get("/getThreeCelebrities", function(req, res){
 			objArray.splice(rando, 1);
 			threeCelebs.push(celeb);
 		}
-		var result = JSON.stringify(threeCelebs);
-		return res.status(200).send(result);
+		//var result = JSON.stringify(threeCelebs);
+		return res.status(200).send(threeCelebs);
 	});
 });
 
