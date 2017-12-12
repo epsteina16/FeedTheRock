@@ -175,7 +175,6 @@ var j = schedule.scheduleJob('/30 * * * * *', function(){
 	});
 
 	count++;
->>>>>>> ffadc56cb287f401ddfc0a51fbd7e7a8034a649c
 });
 
 module.exports = router;
