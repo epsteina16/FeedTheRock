@@ -26,7 +26,7 @@ class Main extends React.Component {
 		this.setState({round_check : this.state.round_check + 1});
 		this.setState({value : this.state.value + 1});
 		console.log(this.state.celebs[this.state.value].name);
-		this.setState({celeb_to_pass : this.state.celebs[this.state.value]});
+		this.setState({celeb_to_pass : this.state.celebs[this.state.value + 1]});
 		if(this.state.round_check == 3){
 			this.state.gamestate = 3;
 		}
@@ -36,6 +36,7 @@ class Main extends React.Component {
 		if(this.state.gamestate == 1){
 			return (
 				<div>
+				<img src="backgroundimages/homebackground.jpg" id="homebackground" />
 				<h2 class="textcenter"> Feed the Rock </h2>
 				<h3 class="textcenter"> The game of portion control </h3>
 				<h4 class="textcenter_italic">  Can you restrain yourself? </h4>

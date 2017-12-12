@@ -46,8 +46,8 @@ export default class Celebrity extends React.Component {
 	}
 	generateScore(nutrients) {
 		// Calculate score
-		var score;
-		var bmr;
+		var inversescore = 0;
+		var bmr = 0;
 		if (this.state.gender == "Male") {
 			bmr = 66 + ( 6.23 * this.state.weight) + ( 12.7 * this.state.height) - ( 6.8 * this.state.age);
 		}
@@ -75,34 +75,47 @@ export default class Celebrity extends React.Component {
 			bmr = bmr * 1.9;
 			consumptioncoeff = 1.36;
 		}
+
+				//console.log(score);
+				console.log(nutrients);
+		inversescore += ((Math.abs(bmr - nutrients.calories)/(bmr)) * 200);
 		consumptioncoeff = consumptioncoeff * (bmr/2000);
-
+				console.log(inversescore);
 		var recfats = 70 * consumptioncoeff;
-		score += ((recfats - Math.abs(recfats - nutrients.fats))/(recfats) * 100);
-
+		inversescore += ((Math.abs(recfats - nutrients.fats)/(recfats)) * 100);
+				console.log(inversescore);
 		var recsaturated = 24 * consumptioncoeff;
-		score += ((recsaturated - Math.abs(recsaturated - nutrients.saturated))/(recsaturated) * 100);
-
+		inversescore += ((Math.abs(recsaturated - nutrients.saturated)/(recsaturated)) * 100);
+				console.log(inversescore);
 		var reccarbs = 310 * consumptioncoeff;
-		score += ((reccarbs - Math.abs(reccarbs - nutrients.carbs))/(reccarbs) * 100);
-
+		inversescore += ((Math.abs(reccarbs - nutrients.carbs)/(reccarbs)) * 100);
+				console.log(inversescore);
 		var recfiber = 28 * consumptioncoeff;
-		score += ((recfiber - Math.abs(recfiber - nutrients.fiber))/(recfiber) * 100);
-
+		inversescore += ((Math.abs(recfiber - nutrients.fiber)/(recfiber)) * 100);
+				console.log(inversescore);
 		var recsugar = 90 * consumptioncoeff;
-		score += ((recsugar - Math.abs(recsugar - nutrients.sugar))/(recsugar) * 100);
-
+		inversescore += ((Math.abs(recsugar - nutrients.sugar)/(recsugar)) * 100);
+				console.log(inversescore);
 		var recprotein = 50 * consumptioncoeff;
-		score += ((recprotein - Math.abs(recprotein - nutrients.protein))/(recprotein) * 100);
-
+		inversescore += ((Math.abs(recprotein - nutrients.protein)/(recprotein)) * 100);
+				console.log(inversescore);
 		var reccholesterol = 70 * consumptioncoeff;
-		score += ((reccholesterol - Math.abs(reccholesterol - nutrients.cholesterol))/(reccholesterol) * 100);
+		inversescore += ((Math.abs(reccholesterol - nutrients.cholesterol)/(reccholesterol)) * 100);
+		var recsodium = 2300 * consumptioncoeff;
+		inversescore += ((Math.abs(recsodium - nutrients.sodium)/(recsodium)) * 100);
 
-		this.setState({score});
-		// send score back to charlie
 
-		var fn = this.sendData.bind(this);
-		fn();
+		console.log(inversescore);
+
+		// console.log(score);
+		console.log("setting state");
+
+		var posscore = 1000 - inversescore;
+		console.log(posscore);
+
+		this.props.setScore(posscore);
+		this.setState({currentDisplay : true});
+
 	}
 
 	toggleDisplay() {
@@ -110,12 +123,6 @@ export default class Celebrity extends React.Component {
 		this.setState({currentDisplay : false});
 	}
 
-	sendData() {
-		// Score has been created
-		console.log(this.state.score);
-		this.props.setScore(this.state.score);
-		this.setState({currentDisplay : true});
-	}
 
 	render() {
 		var exerciseState;
