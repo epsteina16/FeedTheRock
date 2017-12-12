@@ -121,7 +121,12 @@ export default class PickMeal extends React.Component {
 
 	//called to cook
 	cook() {
-	    $('#pan').removeClass().addClass('shake' + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		var choice = Math.floor(Math.random() * 2);
+		var animation = "shake";
+		if (choice % 2 == 0) {
+			animation = "jello";
+		}
+	    $('#pan').removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      	$(this).removeClass();
     	});
 

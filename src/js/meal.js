@@ -1,6 +1,5 @@
 //TODO:
 //add edamam to db
-//pan animation
 
 import React from "react";
 import PickMeal from "./PickMeal";

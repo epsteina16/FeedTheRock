@@ -181,6 +181,7 @@ a {
 #pan {
 	max-width: 100%;
 	padding: 50px;
+	display: block;
 }
 
 #celebbackground {
@@ -293,4 +294,14 @@ a {
 .rattribute-data {
 	flex-grow: 1;
 	order: 3;
+}
+
+.score {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #3498db;
+	padding: 5px;
+	border-bottom: 1px solid #bdc3c7;
+	border-right: 1px solid #bdc3c7;
 }
