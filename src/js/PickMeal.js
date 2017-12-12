@@ -36,8 +36,9 @@ export default class PickMeal extends React.Component {
 			recipes: [],
 			value: "",
 			image: "",
-			cookingTimeLeft: Math.floor(Math.random() * 20) + 10,
-			nutrients: {}
+			cookingTimeLeft: Math.floor(Math.random() * 15) + 10,
+			nutrients: {},
+			amount: 1
 		}
 	}
 
@@ -93,27 +94,35 @@ export default class PickMeal extends React.Component {
 			nutrients.calories = 0;
 		}
 		if (nutrients.CHOCDF == undefined){
+			nutrients.CHOCDF = new Object();
 			nutrients.CHOCDF.quantity = 0;
 		}
 		if (nutrients.SUGAR == undefined){
+			nutrients.SUGAR = new Object();
 			nutrients.SUGAR.quantity = 0;
 		}
 		if (nutrients.PROCNT == undefined){
+			nutrients.PROCNT = new Object();
 			nutrients.PROCNT.quantity = 0;
 		}
 		if (nutrients.FASAT == undefined){
+			nutrients.FASAT = new Object();
 			nutrients.FASAT.quantity = 0;
 		}
 		if (nutrients.CHOLE == undefined){
+			nutrients.CHOLE = new Object();
 			nutrients.CHOLE.quantity = 0;
 		}
 		if (nutrients.FIBTG == undefined){
+			nutrients.FIBTG = new Object();
 			nutrients.FIBTG.quantity = 0;
 		}
 		if (nutrients.FAT == undefined){
+			nutrients.FAT = new Object();
 			nutrients.FAT.quantity = 0;
 		}
 		if (nutrients.NA == undefined){
+			nutrients.NA = new Object();
 			nutrients.NA.quantity = 0;
 		}
 		this.setState({mealChosen: true, image: suggestion.pic, value: suggestion.label, nutrients: nutrients});
@@ -132,13 +141,26 @@ export default class PickMeal extends React.Component {
 
 		if (this.state.cookingTimeLeft == 1) {
 			var meal = new Object();
-			meal.amount = parseInt($("#meal-amount").val());
+			meal.amount = parseFloat($("#quantity").text());
 			meal.recipe = this.state.value;
 			meal.nutrients = this.state.nutrients;
 			this.props.chooseMeal(meal);
 		} else {
 			this.setState({cookingTimeLeft: this.state.cookingTimeLeft - 1});
 		}
+	}
+
+	//called to modify the quantity of the portion
+	modifyQuantity(val) {
+		var quantity = parseFloat($('#quantity').html());
+		quantity = quantity + val;
+		quantity = quantity.toFixed(2);
+		if (quantity <= 0) {
+			quantity = 0.2;
+		} else if (quantity > 5) {
+			quantity = 5;
+		}
+		$('#quantity').text(quantity);
 	}
 
 	render () {
@@ -170,6 +192,12 @@ export default class PickMeal extends React.Component {
 						<p>Carbohydrates: { Math.floor(this.state.nutrients.CHOCDF.quantity) }g</p>
 						<p>Sugar: { Math.floor(this.state.nutrients.SUGAR.quantity)}g</p>
 						<p>Protein: {Math.floor(this.state.nutrients.PROCNT.quantity)}g</p>
+						<div id="clicker">
+							Portions:
+							<button onClick={ () => this.modifyQuantity(0.2) }><span class="fui-triangle-up"></span></button>
+							<span id="quantity">1</span>
+							<button onClick={ () => this.modifyQuantity(-0.2) }><span class="fui-triangle-down"></span></button>
+						</div>
 					</div>
 				</div>
 				): (<br />) }
@@ -185,10 +213,6 @@ export default class PickMeal extends React.Component {
 				        onSuggestionSelected={this.onMealSelected}
 				      />
 				      ) : (<br />)}
-					{ this.state.mealChosen ? 
-							(<div id="slider"><label for="meal-amount">Number of portions: </label><input id="meal-amount" type="range" step="0.5" min="0.5" max="5" /></div>) 
-							: (<br />)
-					}
 				</div>
 
 				{this.state.mealChosen ? 
