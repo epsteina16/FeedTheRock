@@ -162,6 +162,7 @@ var j = schedule.scheduleJob('/30 * * * * *', function(){
 	  console.log('headers:', res.headers);
 
 	  res.on('data', (d) => {
+	  	console.log(d);
 	  	var result = d;
 		//console.log(body);
 		console.log(result.q);
