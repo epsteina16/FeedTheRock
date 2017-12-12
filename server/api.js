@@ -16,6 +16,7 @@ mongoose.connect("mongodb://heroku_sp1cfplm:m93lcp3m90qar7p8tj3cv07cke@ds153015.
 //database models
 var celebrity = require('./models/celebrity');
 var highscore = require('./models/highscore');
+var meals = require('./models/meals')
 
 router.get("/getThreeCelebrities", function(req, res){
 	console.log("here");
@@ -149,9 +150,31 @@ router.get("/getTopTen", function(req, res){
 const recipes = ["egg", "pancakes", "waffles", "french toast", "eggs and potatoes", "corned beef hash", "cereal", "scrambled eggs", "oatmeal", "fruit", "breakfast burrito", "yogurt", "parfait", "burrito", "quesadilla", "sushi", "sandwich", "pasta", "curry", "wrap", "burger", "hot dog", "soup", "salad", "rice", "beans", "shrimp", "steak", "tempura", "duck", "lamb", "vegetarian", "pizza", "pasta and meatballs", "tikka masala", "grilled", "fried"]
 var count = 0;
 
-var j = schedule.scheduleJob('*/5 * * * *', function(){
+var j = schedule.scheduleJob('/30 * * * * *', function(){
 	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
-	request = 
+	request(url, function(error, response, body){
+		if (!error && response.status == 200) {
+			var result = body;
+			var recipe;
+			for (var i = 0; i < result.hits.length; i++){
+				recipe = result.hits[i].recipe;
+				var newMeal = new meals({
+					recipe: recipe.label,
+					image: recipe.image,
+					calories: recipe.calories,
+					totalNutrients: recipe.totalNutrients
+				});
+
+				newMeal.save(function(err, result){
+					if (err) {
+						console.log(err);
+					}
+				});
+			}
+		}
+	});
+
+	count++;
 });
 
 module.exports = router;
