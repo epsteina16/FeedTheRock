@@ -21,6 +21,9 @@ var highscore = require('./models/highscore');
 var meals = require('./models/meals')
 
 router.get("/getThreeCelebrities", function(req, res){
+	myStorage = window.localStorage;
+    var renderedCelebs = myStorage.getItem("sentCelebs"); // store rando in this array (essentially the id of the celeb)
+
 	console.log("here");
 	celebrity.find({}, function(err, obj){
 		if (err) {
@@ -31,6 +34,16 @@ router.get("/getThreeCelebrities", function(req, res){
 		console.log("length of Array is " + objArray.length);
 		var threeCelebs = [];
 		var celeb;
+
+		// While: numAddedCeleb != 3
+			// for size of renderedCelebs
+				//if rando == renderedCelebs[i].id 
+					//restart while
+			// After for loop you know that you havent rendered this celeb
+			// assign celeb and push to threeCelebs
+			// increment numAddedCeleb
+			// add the rando id to the local storage array
+
 		for(var i = 0; i < 3; i++){
 			rando = Math.floor(Math.random() * objArray.length);
 			console.log(rando);
