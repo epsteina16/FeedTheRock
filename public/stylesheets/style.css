@@ -90,7 +90,8 @@ a {
 }
 
 .suggestion-half img{
-	max-width: 100%;
+	max-width: 60%;
+	margin: 0 auto;
 }
 
 .meal-container {
