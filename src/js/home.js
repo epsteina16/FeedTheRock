@@ -18,15 +18,11 @@ class Main extends React.Component {
 	render() {
 		return (
 			<button onClick={function(){
-				$.get(celeb_url, function(err, obj){
-					if(err){
-						console.log("rip");
-					}
-					else {
+				$.get(celeb_url, function(obj, err){
+						console.log(obj[0].name);
 						this.state.celebs[0] = obj[0];
 						this.state.celebs[1] = obj[1];
 						this.state.celebs[2] = obj[2];
-					}
 				})
 				console.log("ah");
 				this.setState({value : value + 1});

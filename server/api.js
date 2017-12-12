@@ -20,15 +20,15 @@ router.get("/getThreeCelebrities", function(req, res){
 			return res.status(500);
 		}
 		var objArray = obj;
-		var rando = Math.random();
-		var tenCelebs = [];
+		var rando = Math.random() % obj.length;
+		var threeCelebs = [];
 		var celeb;
 		for(var i = 0; i < 3; i++){
 			rando = Math.random() * objArray.length;
 			celeb = JSON.stringify(objArray[rando]);
-			tenCelebs.push(celeb);
+			threeCelebs.push(celeb);
 		}
-		var result = JSON.stringify(tenCelebs);
+		var result = JSON.stringify(threeCelebs);
 		return res.status(200).send(result);
 	});
 });
