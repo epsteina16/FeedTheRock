@@ -174,6 +174,9 @@ var j = schedule.scheduleJob('/30 * * * * *', function(){
 					}
 				});
 			}
+		} else {
+			console.log(response.status);
+			console.log(error);
 		}
 	});
 
