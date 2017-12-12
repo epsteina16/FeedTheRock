@@ -54,8 +54,11 @@ class Main extends React.Component {
 					this.setState({difficulty : selected.value});
 
 					//get local storage - celebrities used in past game
-					storage = window.localStorage;
-					celebs = storage.getItem("celebs");
+					var storage = window.localStorage;
+					var celebs = storage.getItem("celebs");
+					if (celebs == null || celebs == undefined){
+						celebs = ["", "", ""]; //empty strings
+					}
 					console.log(celebs);
 
 					$.get(celeb_url, {celeb1: celebs[0], celeb2: celebs[1], celeb3: celebs[2]}, function(obj, err){
@@ -68,12 +71,12 @@ class Main extends React.Component {
 
 							//set local storage - for next game
 							storage.removeItem("celebs");
-							var celebs = [];
-							celebs.append(obj[0].name);
-							celebs.append(obj[1].name);
-							celebs.append(obj[2].name);
-							console.log(celebs);
-							storage.setItem("celebs", celebs);
+							var celebArray = [];
+							celebArray.push(obj[0].name);
+							celebArray.push(obj[1].name);
+							celebArray.push(obj[2].name);
+							console.log(celebArray);
+							storage.setItem("celebs", celebArray);
 					}.bind(this));
 				}.bind(this)} > Start </button>
 				</div>
