@@ -189,7 +189,7 @@ router.get("/getMeal", function(req, res){
 	}
 
 	meals.find({recipe: recipeName}, function(err, recipes){
-		if (err !! !celeb) {
+		if (err || !celeb) {
 			return res.status(500).send();
 		}
 		else {
