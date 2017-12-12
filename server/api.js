@@ -150,11 +150,21 @@ router.get("/getTopTen", function(req, res){
 });
 
 router.post("/addMeal", function(req, res){
-	var recipe = req.body;
+	var recipe = req.body.recipe;
+	var image = req.body.image;
+	var calories = req.body.calories;
+	var totalNutrients = req.body.totalNutrients;
+	var healthLabels = req.body.healthLabels;
+	var dietLabels = req.body.dietLabels;
 	console.log(recipe);
 	
 	var newMeal = new meals({
-		recipe: JSON.parse(recipe)
+		recipe: recipe,
+		image: image,
+		calories: calories,
+		totalNutrients: totalNutrients,
+		healthLabels: healthLabels,
+		dietLabels: dietLabels
 	});
 
 	newMeal.save(function(err, result){
