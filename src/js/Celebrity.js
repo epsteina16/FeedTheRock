@@ -101,7 +101,8 @@ export default class Celebrity extends React.Component {
 		this.setState({score});
 		// send score back to charlie
 
-		sendData().bind(this);
+		var fn = this.sendData.bind(this);
+		fn();
 	}
 
 	toggleDisplay() {
