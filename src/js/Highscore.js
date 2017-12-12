@@ -21,7 +21,8 @@ export default class Highscore extends React.Component {
   			type: "POST",
   			url: post_ten,
   			data: JSON.stringify(sending),
-  			dataType: "json"
+  			dataType: "json",
+  			contentType: "application/json"
 		});
 		console.log("made it here");
 		console.log("here");
