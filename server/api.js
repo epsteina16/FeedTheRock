@@ -21,8 +21,9 @@ var highscore = require('./models/highscore');
 var meals = require('./models/meals')
 
 router.get("/getThreeCelebrities", function(req, res){
-	myStorage = window.localStorage;
-    var renderedCelebs = myStorage.getItem("sentCelebs"); // store rando in this array (essentially the id of the celeb)
+	var celeb1 = req.query.celeb1;
+	var celeb2 = req.query.celeb2;
+	var celeb3 = req.query.celeb3;
 
 	console.log("here");
 	celebrity.find({}, function(err, obj){
@@ -35,23 +36,17 @@ router.get("/getThreeCelebrities", function(req, res){
 		var threeCelebs = [];
 		var celeb;
 
-		// While: numAddedCeleb != 3
-			// for size of renderedCelebs
-				//if rando == renderedCelebs[i].id 
-					//restart while
-			// After for loop you know that you havent rendered this celeb
-			// assign celeb and push to threeCelebs
-			// increment numAddedCeleb
-			// add the rando id to the local storage array
-
-		for(var i = 0; i < 3; i++){
+		while (threeCelebs.length < 3) {
 			rando = Math.floor(Math.random() * objArray.length);
-			console.log(rando);
 			celeb = objArray[rando];
-			objArray.splice(rando, 1);
-			threeCelebs.push(celeb);
+			if (celeb.name == celeb1 || celeb.name == celeb2 || celeb.name == celeb3) {
+				//nothing
+			} else {
+				objArray.splice(rando, 1);
+				threeCelebs.push(celeb);
+			}
 		}
-		//var result = JSON.stringify(threeCelebs);
+		
 		return res.status(200).send(threeCelebs);
 	});
 });
