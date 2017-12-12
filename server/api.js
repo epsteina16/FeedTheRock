@@ -108,8 +108,10 @@ router.get("/getCelebrity", function(req, res){
 });
 
 router.post("/addhighscore", function(req, res){
+	console.log(request.body.username);
 	var username = request.body.username;
 	var score = request.body.score;
+	console.log("here");
 
 	var newHighscore = new highscore({
 		"username":username,
@@ -130,7 +132,7 @@ router.post("/addhighscore", function(req, res){
 router.get("/getTopTen", function(req, res){
 	highscore.find({}, function(err, highscores) {
 		if (!err) {
-			var sortedScores = highscores;
+			var sortedScores = JSON.parse(highscores);
 			sortedScores.sort(function(a,b) {
 				return b.score - a.score;
 			});
