@@ -38,8 +38,7 @@ class Main extends React.Component {
 	}
 
 	render() {
-		/*
-		if(this.state.gamestate == 1){
+		if(this.state.gamestate == 1 || this.state.gamestate == 3){
 			return (
 				<div>
 				<img src="backgroundimages/homebackground.jpg" id="homebackground" />
@@ -102,14 +101,6 @@ class Main extends React.Component {
 				exerciseLevel = {this.state.celeb_to_pass.exerciseLevel} difficulty = {this.state.difficulty}/>
 				</div>
 			);
-		}
-		*/
-		if(this.state.gamestate == 1){
-			return (
-				<div>
-				<Highscore score = {this.state.score}/>
-				</div>
-			)
 		}
 	}
 }
