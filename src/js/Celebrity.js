@@ -46,6 +46,7 @@ export default class Celebrity extends React.Component {
 	}
 	generateScore(nutrients) {
 		// Calculate score
+		var score;
 		var bmr;
 		if (this.state.gender == "Male") {
 			bmr = 66 + ( 6.23 * this.state.weight) + ( 12.7 * this.state.height) - ( 6.8 * this.state.age);
