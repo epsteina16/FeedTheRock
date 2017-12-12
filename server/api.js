@@ -28,7 +28,7 @@ router.get("/getThreeCelebrities", function(req, res){
 		for(var i = 0; i < 3; i++){
 			rando = Math.floor(Math.random() * objArray.length);
 			console.log(rando);
-			celeb = JSON.stringify(objArray[rando]);
+			celeb = objArray[rando];
 			objArray.splice(rando, 1);
 			threeCelebs.push(celeb);
 		}
