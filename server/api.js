@@ -151,6 +151,7 @@ router.get("/getTopTen", function(req, res){
 
 router.post("/addMeal", function(req, res){
 	var recipe = req.body.recipe;
+	console.log(recipe);
 	if (recipe == undefined){
 		return res.status(500).send();
 	}
