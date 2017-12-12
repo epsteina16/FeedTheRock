@@ -19,16 +19,16 @@ router.get("/getThreeCelebrities", function(req, res){
 		if (err) {
 			return res.status(500);
 		}
-		var objArray = JSON.parse(obj);
-		var rando = Math.random();
-		var tenCelebs = [];
+		var objArray = obj;
+		var rando = Math.random() % obj.length;
+		var threeCelebs = [];
 		var celeb;
 		for(var i = 0; i < 3; i++){
 			rando = Math.random() * objArray.length;
 			celeb = JSON.stringify(objArray[rando]);
-			tenCelebs.push(celeb);
+			threeCelebs.push(celeb);
 		}
-		var result = JSON.stringify(tenCelebs);
+		var result = JSON.stringify(threeCelebs);
 		return res.status(200).send(result);
 	});
 });
@@ -120,7 +120,7 @@ router.post("/addhighscore", function(req, res){
 router.get("/getTopTen", function(req, res){
 	highscore.find({}, function(err, highscores) {
 		if (!err) {
-			var sortedScores = JSON.parse(highscores);
+			var sortedScores = highscores;
 			sortedScores.sort(function(a,b) {
 				return b.score - a.score;
 			});
