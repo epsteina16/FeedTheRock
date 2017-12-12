@@ -1,0 +1,71 @@
+@media screen and (max-width: 700px) {
+	h2 {
+		font-size: 26px;
+	}
+
+	h3 {
+		font-size: 22px;
+	}
+
+	h4 {
+		font-size: 18px;
+	}
+
+	/*pick meal component*/
+	.meal {
+		width: 95%;
+		left: 2.5%;
+		right: 2.5%;
+	}
+
+	.meal-pic {
+		width: 90%;
+		padding: 5%;
+		display: inline-block;
+	}
+
+	.meal-ingredients{
+		width: 90%;
+		padding: 5%;
+		display: inline-block;
+	}
+
+	.react-autosuggest__container {
+		width: 240px;
+	}
+
+	.react-autosuggest__input {
+		width: 200px;
+	}
+
+	.react-autosuggest__suggestions-container--open {
+		width: 240px;
+	}
+
+	#pan {
+		width: 80%;
+		display: inline-block;
+	}
+
+	#pan img{
+		max-width: 100%;
+	}
+
+
+	/* Celebrity display component */
+	.container {
+		justify-content: space-between;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	/* Home component */
+
+
+
+
+
+
+
+
+}

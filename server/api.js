@@ -21,6 +21,10 @@ var highscore = require('./models/highscore');
 var meals = require('./models/meals')
 
 router.get("/getThreeCelebrities", function(req, res){
+	var celeb1 = req.query.celeb1;
+	var celeb2 = req.query.celeb2;
+	var celeb3 = req.query.celeb3;
+
 	console.log("here");
 	celebrity.find({}, function(err, obj){
 		if (err) {
@@ -31,14 +35,18 @@ router.get("/getThreeCelebrities", function(req, res){
 		console.log("length of Array is " + objArray.length);
 		var threeCelebs = [];
 		var celeb;
-		for(var i = 0; i < 3; i++){
+
+		while (threeCelebs.length < 3) {
 			rando = Math.floor(Math.random() * objArray.length);
-			console.log(rando);
 			celeb = objArray[rando];
-			objArray.splice(rando, 1);
-			threeCelebs.push(celeb);
+			if (celeb.name == celeb1 || celeb.name == celeb2 || celeb.name == celeb3) {
+				//nothing
+			} else {
+				objArray.splice(rando, 1);
+				threeCelebs.push(celeb);
+			}
 		}
-		//var result = JSON.stringify(threeCelebs);
+		
 		return res.status(200).send(threeCelebs);
 	});
 });
@@ -151,15 +159,18 @@ router.get("/getTopTen", function(req, res){
 	})
 });
 
+//used to add meals to db
 router.post("/addMeal", function(req, res){
-	console.log(req.body);
 	var recipe = req.body.recipe;
 	var image = req.body.image;
 	var calories = req.body.calories;
 	var totalNutrients = req.body.totalNutrients;
 	var healthLabels = req.body.healthLabels;
 	var dietLabels = req.body.dietLabels;
-	console.log(recipe);
+
+	if (recipe == undefined || image == undefined || calories == undefined || totalNutrients == undefined || healthLabels == undefined || dietLabels == undefined) {
+		return res.status(500).send();
+	}
 	
 	var newMeal = new meals({
 		recipe: recipe,
@@ -179,45 +190,22 @@ router.post("/addMeal", function(req, res){
 	return res.status(200).send();
 });
 
+//used to get meals from db
+router.get("/getMeal", function(req, res){
+	var recipeName = req.query.recipeName;
 
-/*var j = schedule.scheduleJob('/30 * * * * *', function(){
-	console.log("MEMEING");
-	console.log(recipes[count]);
-	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
-	
-	https.get('https://encrypted.google.com/', (res) => {
-	  console.log('statusCode:', res.statusCode);
-	  console.log('headers:', res.headers);
+	if (recipeName == undefined) {
+		return res.status(500).send();
+	}
 
-	  res.on('data', (d) => {
-	  	console.log(d);
-	  	var result = d;
-		//console.log(body);
-		console.log(result.q);
-		var recipe;
-		for (var i = 0; i < result.hits.length; i++){
-			recipe = result.hits[i].recipe;
-			console.log(recipe);
-			var newMeal = new meals({
-				recipe: recipe.label,
-				image: recipe.image,
-				calories: recipe.calories,
-				totalNutrients: recipe.totalNutrients
-			});
-
-			newMeal.save(function(err, result){
-				if (err) {
-					console.log(err);
-				}
-			});
+	meals.find({recipe: new RegExp('^'+recipeName+'$', "i")}, function(err, recipes){
+		if (err || !recipes) {
+			return res.status(500).send();
 		}
-	  });
-
-	}).on('error', (e) => {
-	  console.error(e);
+		else {
+			return res.status(200).send(recipes);
+		}
 	});
-
-	count++;
-});*/
+});
 
 module.exports = router;
