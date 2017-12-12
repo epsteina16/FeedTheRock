@@ -15,10 +15,12 @@ var celebrity = require('./models/celebrity');
 var highscore = require('./models/highscore');
 
 router.get("/getThreeCelebrities", function(req, res){
+	console.log("here");
 	celebrity.find({}, function(err, obj){
 		if (err) {
 			return res.status(500);
 		}
+		console.log("yup");
 		var objArray = obj;
 		console.log("length of Array is " + objArray.length);
 		var threeCelebs = [];
