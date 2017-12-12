@@ -151,7 +151,7 @@ var count = 0;
 
 var j = schedule.scheduleJob('*/5 * * * *', function(){
 	var url = "https://api.edamam.com/search?q=" + recipes[count] + "&app_id=b387bdfd&app_key=75e18472c4a3e6bfc9fac10d5ce607c7";
-	request = 
+	request = nut;
 });
 
 module.exports = router;
