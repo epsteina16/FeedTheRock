@@ -53,7 +53,6 @@ class Main extends React.Component {
 							console.log(obj[0].exerciseLevel);
 							console.log(obj[0].partyLevel);
 							this.setState({celebs : obj});
-							this.setState({value : this.state.value + 1});
 							this.setState({celeb_to_pass : this.state.celebs[this.state.value]});
 							console.log("difficulty is" + this.state.difficulty);
 							this.setState({gamestate : 2});
