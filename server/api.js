@@ -150,7 +150,7 @@ router.get("/getTopTen", function(req, res){
 });
 
 router.post("/addMeal", function(req, res){
-	var recipe = req.body.recipe;
+	var recipe = req.body;
 	console.log(recipe);
 	
 	var newMeal = new meals({
