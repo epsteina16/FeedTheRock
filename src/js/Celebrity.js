@@ -113,6 +113,7 @@ export default class Celebrity extends React.Component {
 
 		var posscore = 1000 - inversescore;
 		console.log(posscore);
+		posscore = Math.floor(posscore);
 
 		this.props.setScore(posscore);
 		this.setState({currentDisplay : true});
